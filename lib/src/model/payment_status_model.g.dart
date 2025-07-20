@@ -6,17 +6,17 @@ part of 'payment_status_model.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-_$PaymentStatusModelImpl _$$PaymentStatusModelImplFromJson(
-        Map<String, dynamic> json) =>
-    _$PaymentStatusModelImpl(
-      apps: (json['apps'] as Map<String, dynamic>?)?.map(
-        (k, e) => MapEntry(
-            k, BackdoorPaymentModel.fromJson(e as Map<String, dynamic>)),
-      ),
-    );
+_$LicenseCheckerApiResponseModelImpl
+    _$$LicenseCheckerApiResponseModelImplFromJson(Map<String, dynamic> json) =>
+        _$LicenseCheckerApiResponseModelImpl(
+          apps: (json['apps'] as Map<String, dynamic>?)?.map(
+            (k, e) => MapEntry(k,
+                LicenseCheckerPaymentModel.fromJson(e as Map<String, dynamic>)),
+          ),
+        );
 
-Map<String, dynamic> _$$PaymentStatusModelImplToJson(
-        _$PaymentStatusModelImpl instance) =>
+Map<String, dynamic> _$$LicenseCheckerApiResponseModelImplToJson(
+        _$LicenseCheckerApiResponseModelImpl instance) =>
     <String, dynamic>{
       'apps': instance.apps,
     };

@@ -1,8 +1,8 @@
-name: backdoor_flutter
+name: license_checker_flutter
 version: 1.0.2
-homepage: https://github.com/gktirkha/backdoor_flutter/
-repository: https://github.com/gktirkha/backdoor_flutter/
-description: BackdoorFlutter simplifies payment management in Flutter apps, providing status checks, trial handling, and customizable callbacks for an improved user experience.
+homepage: https://github.com/gktirkha/license_checker_flutter/
+repository: https://github.com/gktirkha/license_checker_flutter/
+description: LicenseCheckerFlutter simplifies payment management in Flutter apps, providing status checks, trial handling, and customizable callbacks for an improved user experience.
 
 environment:
   sdk: ^3.5.2

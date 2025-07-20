@@ -10,7 +10,7 @@ dependencies:
   flutter:
     sdk: flutter
   
-  backdoor_flutter:
+  license_checker_flutter:
     path: ../
 
 dev_dependencies:

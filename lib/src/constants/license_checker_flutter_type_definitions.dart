@@ -1,6 +1,4 @@
-import '../exception/backdoor_flutter_exception.dart';
-import '../model/payment_status_model.dart';
-import 'on_unhandled_reason.dart';
+import '../../license_checker_flutter.dart';
 
 /// Callback type for handling unhandled cases.
 ///
@@ -8,14 +6,14 @@ import 'on_unhandled_reason.dart';
 /// providing the reason for the unhandled case and the associated payment model.
 typedef OnUnhandled = Function(
   OnUnhandledReason reason,
-  BackdoorPaymentModel? backdoorPaymentModel,
+  LicenseCheckerPaymentModel? licenseCheckerPaymentModel,
 );
 
 /// Callback type for handling exceptions.
 ///
-/// This function is invoked when a [BackdoorFlutterException] occurs,
+/// This function is invoked when a [LicenseCheckerFlutterException] occurs,
 /// allowing for custom error handling.
-typedef OnException = Function(BackdoorFlutterException exception);
+typedef OnException = Function(LicenseCheckerFlutterException exception);
 
 /// Callback type for when the application is not found.
 ///
@@ -26,20 +24,20 @@ typedef OnAppNotFound = Function();
 ///
 /// This function is invoked when the application is in a paid state,
 /// providing the relevant payment model.
-typedef OnPaid = Function(BackdoorPaymentModel backdoorPaymentModel);
+typedef OnPaid = Function(LicenseCheckerPaymentModel licenseCheckerPaymentModel);
 
 /// Callback type for handling unpaid application status.
 ///
 /// This function is invoked when the application is in an unpaid state,
 /// providing the relevant payment model.
-typedef OnUnPaid = Function(BackdoorPaymentModel backdoorPaymentModel);
+typedef OnUnPaid = Function(LicenseCheckerPaymentModel licenseCheckerPaymentModel);
 
 /// Callback type for handling limited launch scenarios.
 ///
 /// This function is invoked when the application is in a limited launch state,
 /// providing the payment model and the current launch count.
 typedef OnLimitedLaunch = Function(
-  BackdoorPaymentModel backdoorPaymentModel,
+  LicenseCheckerPaymentModel licenseCheckerPaymentModel,
   int currentCount,
 );
 
@@ -48,7 +46,7 @@ typedef OnLimitedLaunch = Function(
 /// This function is called when the application has exceeded its allowed launch count,
 /// providing the relevant payment model.
 typedef OnLimitedLaunchExceeded = Function(
-  BackdoorPaymentModel backdoorPaymentModel,
+  LicenseCheckerPaymentModel licenseCheckerPaymentModel,
 );
 
 /// Callback type for handling trial periods.
@@ -56,7 +54,7 @@ typedef OnLimitedLaunchExceeded = Function(
 /// This function is invoked when the application is in a trial state,
 /// providing the payment model, the trial expiry date, and an optional warning date.
 typedef OnTrial = Function(
-  BackdoorPaymentModel backdoorPaymentModel,
+  LicenseCheckerPaymentModel licenseCheckerPaymentModel,
   DateTime expiryDate,
   DateTime? warningDate,
 );
@@ -66,7 +64,7 @@ typedef OnTrial = Function(
 /// This function is invoked to notify about an impending trial expiry,
 /// providing the payment model, the trial expiry date, and the warning date.
 typedef OnTrialWarning = Function(
-  BackdoorPaymentModel backdoorPaymentModel,
+  LicenseCheckerPaymentModel licenseCheckerPaymentModel,
   DateTime expiryDate,
   DateTime warningDate,
 );
@@ -76,7 +74,7 @@ typedef OnTrialWarning = Function(
 /// This function is invoked when the trial period has ended,
 /// providing the payment model and the trial expiry date.
 typedef OnTrialEnded = Function(
-  BackdoorPaymentModel backdoorPaymentModel,
+  LicenseCheckerPaymentModel licenseCheckerPaymentModel,
   DateTime expiryDate,
 );
 
@@ -85,7 +83,7 @@ typedef OnTrialEnded = Function(
 /// This function is invoked when there is a version mismatch between the target version
 /// and the configured version, providing the payment model, the target version, and the configured version.
 typedef OnTargetVersionMisMatch = Function(
-  BackdoorPaymentModel backdoorPaymentModel,
+  LicenseCheckerPaymentModel licenseCheckerPaymentModel,
   double targetVersion,
   double configuredVersion,
 );

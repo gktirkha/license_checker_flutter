@@ -1,7 +1,7 @@
 part of '../services/storage_service.dart';
 
 abstract class _StorageServiceKeys {
-  static String get _ref => 'BACKDOOR_FLUTTER_REF_';
+  static String get _ref => 'LICENSE_CHECKER_FLUTTER_REF_';
 
   static String get version => '${_ref}VERSION';
 

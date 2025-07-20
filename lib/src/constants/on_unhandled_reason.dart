@@ -1,5 +1,5 @@
 // ignore_for_file: constant_identifier_names
-library backdoor_flutter;
+library;
 
 /// Enumeration representing various reasons for unhandled cases. when OnUnhandled is invoked
 

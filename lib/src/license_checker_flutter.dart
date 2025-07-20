@@ -3,20 +3,20 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 
-import 'constants/backdoor_flutter_type_definitions.dart';
+import 'constants/license_checker_flutter_type_definitions.dart';
 import 'constants/on_unhandled_reason.dart';
 import 'constants/payment_status.dart';
-import 'exception/backdoor_flutter_exception.dart';
+import 'exception/license_checker_flutter_exception.dart';
 import 'model/payment_status_model.dart';
 import 'services/init_service.dart';
 import 'services/storage_service.dart';
 
-/// [BackdoorFlutter] Class Provides provides method to check payment status and act accordingly
+/// [LicenseCheckerFlutter] Class Provides provides method to check payment status and act accordingly
 ///
 /// it provides 2 methods
 /// 1. [init] to initialize configuration
 /// 2. [checkStatus] to check the status
-abstract class BackdoorFlutter {
+abstract class LicenseCheckerFlutter {
   static late final String _jsonUrl;
 
   static late final String _appName;
@@ -25,7 +25,7 @@ abstract class BackdoorFlutter {
 
   static late final double _version;
 
-  static const String _apiLogTag = 'BACKDOOR_FLUTTER_API_LOG';
+  static const String _apiLogTag = 'LICENSE_CHECKER_FLUTTER_API_LOG';
 
   static late bool _showApiLogs;
 
@@ -37,14 +37,14 @@ abstract class BackdoorFlutter {
   ///
   /// Parameters:
   /// - [jsonUrl] : The URL where the JSON configuration file is hosted.
-  ///   Corresponding environment variable: `BACKDOOR_JSON_URL`.
+  ///   Corresponding environment variable: `LICENSE_CHECKER_JSON_URL`.
   /// - [appName] : The name of the app to be looked up in the JSON file.
-  ///   Corresponding environment variable: `BACKDOOR_APP_NAME`.
-  /// - [version] : The version of the backdoor rules, which must be greater than 0.
-  ///   Corresponding environment variable: `BACKDOOR_VERSION`.
+  ///   Corresponding environment variable: `LICENSE_CHECKER_APP_NAME`.
+  /// - [version] : The version of the LICENSE_CHECKER rules, which must be greater than 0.
+  ///   Corresponding environment variable: `LICENSE_CHECKER_VERSION`.
   /// - [autoDecrementLaunchCount] : If set to `true`, the launch count will be automatically managed.
   ///   If `false`, you must manually decrement the launch count using the [decrementCount] method.
-  ///   Corresponding environment variable: `BACKDOOR_AUTO_DECREMENT`.
+  ///   Corresponding environment variable: `LICENSE_CHECKER_AUTO_DECREMENT`.
   ///
   /// Throws:
   /// - An exception if any required parameters are missing or invalid.
@@ -62,14 +62,13 @@ abstract class BackdoorFlutter {
     _showApiLogs = showApiLogs;
     _jsonUrl = InitService.initializeUrl(jsonUrl);
     _appName = InitService.initializeAppName(appName);
-    _autoDecrementLaunchCount =
-        InitService.initializeAutoDecrement(autoDecrementLaunchCount);
+    _autoDecrementLaunchCount = InitService.initializeAutoDecrement(autoDecrementLaunchCount);
     _version = InitService.initializeVersion(version);
     await StorageService.init();
     await StorageService.setConfig(_version, _appName);
   }
 
-  static void _logger(dynamic data, {String name = 'BACKDOOR_FLUTTER'}) {
+  static void _logger(dynamic data, {String name = 'LICENSE_CHECKER_FLUTTER'}) {
     log(data.toString(), name: name);
   }
 
@@ -83,17 +82,16 @@ abstract class BackdoorFlutter {
   static Future<void> decrementCount() => StorageService.decrementCount();
 
   static Future<bool> _shouldCheckOnline() async {
-    final BackdoorPaymentModel? backdoorPaymentModel =
-        await StorageService.getPaymentModel();
-    if (backdoorPaymentModel == null) {
+    final LicenseCheckerPaymentModel? licenseCheckerPaymentModel = await StorageService.getPaymentModel();
+    if (licenseCheckerPaymentModel == null) {
       return true;
     }
-    if (backdoorPaymentModel.targetVersion != _version) {
+    if (licenseCheckerPaymentModel.targetVersion != _version) {
       return true;
     }
-    switch (backdoorPaymentModel.status) {
+    switch (licenseCheckerPaymentModel.status) {
       case PaymentStatus.PAID:
-        return backdoorPaymentModel.shouldCheckAfterPaid;
+        return licenseCheckerPaymentModel.shouldCheckAfterPaid;
 
       case PaymentStatus.UNPAID:
         return true;
@@ -103,18 +101,16 @@ abstract class BackdoorFlutter {
         return (currentCount == null || currentCount <= 0);
 
       case PaymentStatus.ON_TRIAL:
-        if (backdoorPaymentModel.checkDuringTrial == true) {
+        if (licenseCheckerPaymentModel.checkDuringTrial == true) {
           return true;
         }
         final now = DateTime.now();
-        final warningDate = backdoorPaymentModel.warningDate;
-        final expiryDate = backdoorPaymentModel.expireDateTime;
+        final warningDate = licenseCheckerPaymentModel.warningDate;
+        final expiryDate = licenseCheckerPaymentModel.expireDateTime;
         if (expiryDate == null) {
           return true;
         }
-        if (warningDate != null &&
-            now.isAfter(warningDate) &&
-            now.isBefore(expiryDate)) {
+        if (warningDate != null && now.isAfter(warningDate) && now.isBefore(expiryDate)) {
           return true;
         } else {
           return now.isAfter(expiryDate);
@@ -125,7 +121,7 @@ abstract class BackdoorFlutter {
     }
   }
 
-  static Future<BackdoorPaymentModel?> _onlineModel({
+  static Future<LicenseCheckerPaymentModel?> _onlineModel({
     required Map<String, dynamic> httpHeaders,
     required Map<String, dynamic> httpQueryParameters,
     required Map<String, dynamic> httpRequestBody,
@@ -158,8 +154,7 @@ abstract class BackdoorFlutter {
       ))
           .data;
 
-      final BackdoorPaymentApiResponseModel apiResponseModel =
-          BackdoorPaymentApiResponseModel.fromJson(
+      final LicenseCheckerApiResponseModel apiResponseModel = LicenseCheckerApiResponseModel.fromJson(
         res is Map ? res : jsonDecode(res),
       );
       return apiResponseModel.apps?[_appName];
@@ -176,9 +171,9 @@ abstract class BackdoorFlutter {
           DioExceptionType.unknown => 'UNKNOWN',
         };
 
-        throw BackdoorFlutterException(
+        throw LicenseCheckerFlutterException(
           message: message,
-          type: BackdoorFlutterExceptionType.NETWORK_EXCEPTION,
+          type: LicenseCheckerExceptionType.NETWORK_EXCEPTION,
           apiResponse: e.response?.toString(),
           stackTrace: e.stackTrace,
           operationConfiguration: await StorageService.getPaymentModel(),
@@ -214,7 +209,7 @@ abstract class BackdoorFlutter {
   /// - [useCachedConfigOnNetworkException] : Flag indicating whether to use cached configuration in case of a network exception. Defaults to true.
   ///
   /// Throws:
-  /// - [BackdoorFlutterException] if there is an issue with the target version or configuration.
+  /// - [LicenseCheckerFlutterException] if there is an issue with the target version or configuration.
   ///
   /// Returns:
   /// - A [Future] that completes when the status check is done.
@@ -238,9 +233,8 @@ abstract class BackdoorFlutter {
   }) async {
     try {
       final bool shouldCheckOnline = await _shouldCheckOnline();
-      BackdoorPaymentModel? storedModel =
-          await StorageService.getPaymentModel();
-      final BackdoorPaymentModel? operationModel = shouldCheckOnline
+      LicenseCheckerPaymentModel? storedModel = await StorageService.getPaymentModel();
+      final LicenseCheckerPaymentModel? operationModel = shouldCheckOnline
           ? await _onlineModel(
               httpHeaders: httpHeaders ?? {},
               httpQueryParameters: httpQueryParameters ?? {},
@@ -265,9 +259,9 @@ abstract class BackdoorFlutter {
 
       final targetVersion = operationModel.targetVersion;
       if (targetVersion == null) {
-        throw BackdoorFlutterException(
+        throw LicenseCheckerFlutterException(
           message: 'target_version not set in remote json',
-          type: BackdoorFlutterExceptionType.CONFIGURATION_EXCEPTION,
+          type: LicenseCheckerExceptionType.CONFIGURATION_EXCEPTION,
           operationConfiguration: operationModel,
         );
       }
@@ -299,12 +293,8 @@ abstract class BackdoorFlutter {
         onTargetVersionMisMatch: onTargetVersionMisMatch,
       );
     } catch (e) {
-      final BackdoorPaymentModel? operationModel =
-          await StorageService.getPaymentModel();
-      if (useCachedConfigOnNetworkException &&
-          operationModel != null &&
-          e is BackdoorFlutterException &&
-          e.type == BackdoorFlutterExceptionType.NETWORK_EXCEPTION) {
+      final LicenseCheckerPaymentModel? operationModel = await StorageService.getPaymentModel();
+      if (useCachedConfigOnNetworkException && operationModel != null && e is LicenseCheckerFlutterException && e.type == LicenseCheckerExceptionType.NETWORK_EXCEPTION) {
         _handleExecution(
           onPaid: onPaid,
           onTrial: onTrial,
@@ -339,7 +329,7 @@ abstract class BackdoorFlutter {
     OnTrialWarning? onTrialWarning,
     OnTrialEnded? onTrialEnded,
     OnTargetVersionMisMatch? onTargetVersionMisMatch,
-    required BackdoorPaymentModel operationModel,
+    required LicenseCheckerPaymentModel operationModel,
     required bool isOnlineModel,
   }) async {
     try {
@@ -365,17 +355,15 @@ abstract class BackdoorFlutter {
           int? currentLaunchCount = await StorageService.getLaunchCount();
 
           if (allowedLaunches == null) {
-            throw BackdoorFlutterException(
-              message:
-                  'max_launch not set for ALLOW_LIMITED_LAUNCHES mechanism in remote json file',
-              type: BackdoorFlutterExceptionType.CONFIGURATION_EXCEPTION,
+            throw LicenseCheckerFlutterException(
+              message: 'max_launch not set for ALLOW_LIMITED_LAUNCHES mechanism in remote json file',
+              type: LicenseCheckerExceptionType.CONFIGURATION_EXCEPTION,
               operationConfiguration: operationModel,
             );
           }
 
           if (isOnlineModel) {
-            if (!operationModel.strictMaxLaunch ||
-                (currentLaunchCount == null)) {
+            if (!operationModel.strictMaxLaunch || (currentLaunchCount == null)) {
               StorageService.setLaunchCount(allowedLaunches);
             }
           }
@@ -407,15 +395,12 @@ abstract class BackdoorFlutter {
           final warningDate = operationModel.warningDate;
           final expiryDate = operationModel.expireDateTime;
           if (expiryDate == null) {
-            throw BackdoorFlutterException(
-              message:
-                  'expire_date not set for ON_TRIAL mechanism in remote json file',
-              type: BackdoorFlutterExceptionType.CONFIGURATION_EXCEPTION,
+            throw LicenseCheckerFlutterException(
+              message: 'expire_date not set for ON_TRIAL mechanism in remote json file',
+              type: LicenseCheckerExceptionType.CONFIGURATION_EXCEPTION,
             );
           }
-          if (warningDate != null &&
-              now.isAfter(warningDate) &&
-              now.isBefore(expiryDate)) {
+          if (warningDate != null && now.isAfter(warningDate) && now.isBefore(expiryDate)) {
             if (onTrialWarning != null) {
               onTrialWarning(operationModel, expiryDate, warningDate);
             } else {
@@ -437,10 +422,9 @@ abstract class BackdoorFlutter {
           break;
 
         case null:
-          BackdoorFlutterException(
-            message:
-                'UNKNOWN_PAYMENT_STATUS, Please Make Sure that Payment status in json is one of following\nPAID\nUNPAID\nALLOW_LIMITED_LAUNCHES\nON_TRIAL,',
-            type: BackdoorFlutterExceptionType.UNKNOWN_PAYMENT_STATUS,
+          LicenseCheckerFlutterException(
+            message: 'UNKNOWN_PAYMENT_STATUS, Please Make Sure that Payment status in json is one of following\nPAID\nUNPAID\nALLOW_LIMITED_LAUNCHES\nON_TRIAL,',
+            type: LicenseCheckerExceptionType.UNKNOWN_PAYMENT_STATUS,
             operationConfiguration: operationModel,
           );
           break;
@@ -451,19 +435,19 @@ abstract class BackdoorFlutter {
     }
   }
 
-  static BackdoorFlutterException _convertException(dynamic exception) {
-    if (exception is BackdoorFlutterException) {
+  static LicenseCheckerFlutterException _convertException(dynamic exception) {
+    if (exception is LicenseCheckerFlutterException) {
       return exception;
     } else if (exception is Error) {
-      return BackdoorFlutterException(
+      return LicenseCheckerFlutterException(
         message: exception.toString(),
-        type: BackdoorFlutterExceptionType.UNKNOWN,
+        type: LicenseCheckerExceptionType.UNKNOWN,
         stackTrace: exception.stackTrace,
       );
     } else {
-      return BackdoorFlutterException(
+      return LicenseCheckerFlutterException(
         message: exception.toString(),
-        type: BackdoorFlutterExceptionType.UNKNOWN,
+        type: LicenseCheckerExceptionType.UNKNOWN,
       );
     }
   }

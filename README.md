@@ -1,10 +1,10 @@
-# Flutter Backdoor Package
+# Flutter LicenseChecker Package
 
-This package adds a backdoor which checks for payment status for freelancing or other projects
+This package adds a LicenseChecker which checks for payment status for freelancing or other projects
 
 # Requirements
 
-A hosted json file in following [format](https://raw.githubusercontent.com/gktirkha/backdoor_flutter/refs/heads/master/assets/example-hosted.json), A single json file can handle multiple projects
+A hosted json file in following [format](https://raw.githubusercontent.com/gktirkha/license_checker_flutter/refs/heads/master/assets/example-hosted.json), A single json file can handle multiple projects
 
 # Json Arguments
 1. **apps:** Contains all the app objects, if we want to add a new app, Just add there
@@ -16,7 +16,7 @@ A hosted json file in following [format](https://raw.githubusercontent.com/gktir
         1. **ALLOW_LIMITED_LAUNCHES:** use max launch mechanism
         1. **ON_TRIAL:** use expire date mechanism
     
-    - **target_version** to check Against backdoor version configured in code (should be greater than 0)
+    - **target_version** to check Against LicenseChecker version configured in code (should be greater than 0)
     - **should_check_after_paid** to force check json online even after status is paid (once set to false, devices with cached data will not have any effect after setting to true)
     - **check_during_trial** to force check json online in trial period (once set to false, devices with cached data will not have any effect after setting to true)
     - **expire_date** expiry date for **ON_TRIAL** mechanism
@@ -29,32 +29,31 @@ A hosted json file in following [format](https://raw.githubusercontent.com/gktir
 
 
 # Flow Chart For Whole Mechanism 
-1. [image file](https://github.com/gktirkha/backdoor_flutter/blob/master/assets/flow.png) 
-2. [draw.io](https://github.com/gktirkha/backdoor_flutter/blob/master/assets/flow.drawio)
+1. [image file](https://github.com/gktirkha/license_checker_flutter/blob/master/assets/flow.png) 
+2. [draw.io](https://github.com/gktirkha/license_checker_flutter/blob/master/assets/flow.drawio)
 
 # Usage
 
-> Please Refer To dart [Dart Doc Version](https://gktirkha.github.io/flutter_packages_doc/backdoor_flutter)
+> Please Refer To dart [Dart Doc Version](https://gktirkha.github.io/flutter_packages_doc/license_checker_flutter)
 
 1. add dependency
 
     ``` yaml
     dependencies:
-        backdoor_flutter: ^latest_version
+        license_checker_flutter: ^latest_version
     ```
 1. in code 
-    ``` dart
+    ```dart
     import 'dart:developer';
 
-    import 'package:backdoor_flutter/backdoor_flutter.dart';
     import 'package:flutter/material.dart';
+    import 'package:license_checker_flutter/license_checker_flutter.dart';
 
     void main() async {
     WidgetsFlutterBinding.ensureInitialized();
 
-    await BackdoorFlutter.init(
-        jsonUrl:
-            "https://raw.githubusercontent.com/gktirkha/backdoor_flutter/beta/assets/example-hosted.json",
+    await LicenseCheckerFlutter.init(
+        jsonUrl: "https://raw.githubusercontent.com/gktirkha/license_checker_flutter/beta/assets/example-hosted.json",
         appName: "trial_expire",
         version: 1,
     );
@@ -71,55 +70,48 @@ A hosted json file in following [format](https://raw.githubusercontent.com/gktir
             body: Center(
             child: ElevatedButton(
                 onPressed: () {
-                BackdoorFlutter.checkStatus(
+                LicenseCheckerFlutter.checkStatus(
                     onException: (exception) {
-                        log(exception.toString(), name: "onException");
+                    log(exception.toString(), name: "onException");
                     },
-                    onUnhandled: (reason, backdoorPaymentModel) {
-                        log(reason.name, name: "onUnhandled");
-                        log(backdoorPaymentModel.toString(), name: "onUnhandled");
+                    onUnhandled: (reason, licenseCheckerPaymentModel) {
+                    log(reason.name, name: "onUnhandled");
+                    log(licenseCheckerPaymentModel.toString(), name: "onUnhandled");
                     },
                     onAppNotFound: () {
-                        log("onAppNotFound", name: "onAppNotFound");
+                    log("onAppNotFound", name: "onAppNotFound");
                     },
-                    onLimitedLaunch: (backdoorPaymentModel, currentCount) {
-                        log(currentCount.toString(), name: "onLimitedLaunch");
-                        log(backdoorPaymentModel.toString(), name: "onLimitedLaunch");
+                    onLimitedLaunch: (licenseCheckerPaymentModel, currentCount) {
+                    log(currentCount.toString(), name: "onLimitedLaunch");
+                    log(licenseCheckerPaymentModel.toString(), name: "onLimitedLaunch");
                     },
-                    onLimitedLaunchExceeded: (backdoorPaymentModel) {
-                        log(backdoorPaymentModel.toString(),
-                        name: "onLimitedLaunchExceeded");
+                    onLimitedLaunchExceeded: (licenseCheckerPaymentModel) {
+                    log(licenseCheckerPaymentModel.toString(), name: "onLimitedLaunchExceeded");
                     },
-                    onPaid: (backdoorPaymentModel) {
-                        log(backdoorPaymentModel.toString(), name: "onPaid");
+                    onPaid: (licenseCheckerPaymentModel) {
+                    log(licenseCheckerPaymentModel.toString(), name: "onPaid");
                     },
-                    onTargetVersionMisMatch:
-                        (backdoorPaymentModel, targetVersion, configuredVersion) {
-                        log(backdoorPaymentModel.toString(),
-                        name: "onTargetVersionMisMatch");
-                        log(targetVersion.toString(),
-                        name: "onTargetVersionMisMatch Target Version");
-                        log(configuredVersion.toString(),
-                        name: "onTargetVersionMisMatch Configured Version");
+                    onTargetVersionMisMatch: (licenseCheckerPaymentModel, targetVersion, configuredVersion) {
+                    log(licenseCheckerPaymentModel.toString(), name: "onTargetVersionMisMatch");
+                    log(targetVersion.toString(), name: "onTargetVersionMisMatch Target Version");
+                    log(configuredVersion.toString(), name: "onTargetVersionMisMatch Configured Version");
                     },
-                    onTrial: (backdoorPaymentModel, expiryDate, warningDate) {
-                        log(backdoorPaymentModel.toString(), name: "onTrial");
-                        log(expiryDate.toString(), name: "onTrial expiryDate");
-                        log(warningDate.toString(), name: "onTrial warningDate");
+                    onTrial: (licenseCheckerPaymentModel, expiryDate, warningDate) {
+                    log(licenseCheckerPaymentModel.toString(), name: "onTrial");
+                    log(expiryDate.toString(), name: "onTrial expiryDate");
+                    log(warningDate.toString(), name: "onTrial warningDate");
                     },
-                    onTrialEnded: (backdoorPaymentModel, expiryDate) {
-                        log(backdoorPaymentModel.toString(), name: "onTrialEnded");
-                        log(expiryDate.toString(), name: "onTrialEnded expiryDate");
+                    onTrialEnded: (licenseCheckerPaymentModel, expiryDate) {
+                    log(licenseCheckerPaymentModel.toString(), name: "onTrialEnded");
+                    log(expiryDate.toString(), name: "onTrialEnded expiryDate");
                     },
-                    onTrialWarning:
-                        (backdoorPaymentModel, expiryDate, warningDate) {
-                        log(backdoorPaymentModel.toString(), name: "onTrialWarning");
-                        log(expiryDate.toString(), name: "onTrialWarning expiryDate");
-                        log(warningDate.toString(),
-                        name: "onTrialWarning warningDate");
+                    onTrialWarning: (licenseCheckerPaymentModel, expiryDate, warningDate) {
+                    log(licenseCheckerPaymentModel.toString(), name: "onTrialWarning");
+                    log(expiryDate.toString(), name: "onTrialWarning expiryDate");
+                    log(warningDate.toString(), name: "onTrialWarning warningDate");
                     },
-                    onUnPaid: (backdoorPaymentModel) {
-                        log(backdoorPaymentModel.toString(), name: "onUnPaid");
+                    onUnPaid: (licenseCheckerPaymentModel) {
+                    log(licenseCheckerPaymentModel.toString(), name: "onUnPaid");
                     },
                 );
                 },
