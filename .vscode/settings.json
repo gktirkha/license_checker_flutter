@@ -1,11 +1,12 @@
 {
-    "editor.codeActionsOnSave": {
-        "source.fixAll": "explicit",
-        "source.organizeImports": "explicit"
-    },
-    "dart.lineLength": 200,
-    "cSpell.words": [
-        "drawio",
-        "Splitted"
-    ]
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "explicit",
+    "source.organizeImports": "explicit"
+  },
+  "dart.lineLength": 200,
+  "cSpell.words": [
+    "drawio",
+    "Splitted"
+  ],
+  "dart.flutterSdkPath": ".fvm/versions/3.41.4"
 }

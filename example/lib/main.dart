@@ -7,7 +7,8 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await LicenseCheckerFlutter.init(
-    jsonUrl: "https://raw.githubusercontent.com/gktirkha/license_checker_flutter/refs/heads/master/assets/example-hosted.json",
+    jsonUrl:
+        "https://raw.githubusercontent.com/gktirkha/license_checker_flutter/refs/heads/master/assets/example-hosted.json",
     appName: "trial_expire",
     version: 1,
   );
@@ -30,25 +31,32 @@ class MainApp extends StatelessWidget {
                 },
                 onUnhandled: (reason, licenseCheckerPaymentModel) {
                   log(reason.name, name: "onUnhandled");
-                  log(licenseCheckerPaymentModel.toString(), name: "onUnhandled");
+                  log(licenseCheckerPaymentModel.toString(),
+                      name: "onUnhandled");
                 },
                 onAppNotFound: () {
                   log("onAppNotFound", name: "onAppNotFound");
                 },
                 onLimitedLaunch: (licenseCheckerPaymentModel, currentCount) {
                   log(currentCount.toString(), name: "onLimitedLaunch");
-                  log(licenseCheckerPaymentModel.toString(), name: "onLimitedLaunch");
+                  log(licenseCheckerPaymentModel.toString(),
+                      name: "onLimitedLaunch");
                 },
                 onLimitedLaunchExceeded: (licenseCheckerPaymentModel) {
-                  log(licenseCheckerPaymentModel.toString(), name: "onLimitedLaunchExceeded");
+                  log(licenseCheckerPaymentModel.toString(),
+                      name: "onLimitedLaunchExceeded");
                 },
                 onPaid: (licenseCheckerPaymentModel) {
                   log(licenseCheckerPaymentModel.toString(), name: "onPaid");
                 },
-                onTargetVersionMisMatch: (licenseCheckerPaymentModel, targetVersion, configuredVersion) {
-                  log(licenseCheckerPaymentModel.toString(), name: "onTargetVersionMisMatch");
-                  log(targetVersion.toString(), name: "onTargetVersionMisMatch Target Version");
-                  log(configuredVersion.toString(), name: "onTargetVersionMisMatch Configured Version");
+                onTargetVersionMisMatch: (licenseCheckerPaymentModel,
+                    targetVersion, configuredVersion) {
+                  log(licenseCheckerPaymentModel.toString(),
+                      name: "onTargetVersionMisMatch");
+                  log(targetVersion.toString(),
+                      name: "onTargetVersionMisMatch Target Version");
+                  log(configuredVersion.toString(),
+                      name: "onTargetVersionMisMatch Configured Version");
                 },
                 onTrial: (licenseCheckerPaymentModel, expiryDate, warningDate) {
                   log(licenseCheckerPaymentModel.toString(), name: "onTrial");
@@ -56,13 +64,17 @@ class MainApp extends StatelessWidget {
                   log(warningDate.toString(), name: "onTrial warningDate");
                 },
                 onTrialEnded: (licenseCheckerPaymentModel, expiryDate) {
-                  log(licenseCheckerPaymentModel.toString(), name: "onTrialEnded");
+                  log(licenseCheckerPaymentModel.toString(),
+                      name: "onTrialEnded");
                   log(expiryDate.toString(), name: "onTrialEnded expiryDate");
                 },
-                onTrialWarning: (licenseCheckerPaymentModel, expiryDate, warningDate) {
-                  log(licenseCheckerPaymentModel.toString(), name: "onTrialWarning");
+                onTrialWarning:
+                    (licenseCheckerPaymentModel, expiryDate, warningDate) {
+                  log(licenseCheckerPaymentModel.toString(),
+                      name: "onTrialWarning");
                   log(expiryDate.toString(), name: "onTrialWarning expiryDate");
-                  log(warningDate.toString(), name: "onTrialWarning warningDate");
+                  log(warningDate.toString(),
+                      name: "onTrialWarning warningDate");
                 },
                 onUnPaid: (licenseCheckerPaymentModel) {
                   log(licenseCheckerPaymentModel.toString(), name: "onUnPaid");

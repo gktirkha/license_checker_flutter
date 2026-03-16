@@ -87,7 +87,9 @@ abstract class StorageService {
   /// Sets the payment model in SharedPreferences.
   ///
   /// [paymentModel] - The [LicenseCheckerPaymentModel] to be stored.
-  static Future<void> setPaymentModel(LicenseCheckerPaymentModel paymentModel) async {
+  static Future<void> setPaymentModel(
+    LicenseCheckerPaymentModel paymentModel,
+  ) async {
     await _instance.setString(
       _StorageServiceKeys.paymentModel,
       jsonEncode(paymentModel),
@@ -104,7 +106,8 @@ abstract class StorageService {
   /// Returns:
   /// - A [LicenseCheckerPaymentModel] if found, or null if not set.
   static Future<LicenseCheckerPaymentModel?> getPaymentModel() async {
-    final String? paymentString = _instance.getString(_StorageServiceKeys.paymentModel);
+    final String? paymentString =
+        _instance.getString(_StorageServiceKeys.paymentModel);
     if (paymentString == null) {
       return null;
     }
@@ -116,7 +119,8 @@ abstract class StorageService {
   /// [launchCount] - The count of launches to be stored.
   /// Negative counts will be converted to a positive value multiplied by 100.
   static Future<void> setLaunchCount(int launchCount) async {
-    final launchToBeSet = launchCount < 0 ? launchCount * -1 * 100 : launchCount;
+    final launchToBeSet =
+        launchCount < 0 ? launchCount * -1 * 100 : launchCount;
     await _instance.setInt(_StorageServiceKeys.launchCount, launchToBeSet);
   }
 

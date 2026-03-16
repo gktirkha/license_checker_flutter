@@ -20,7 +20,8 @@ abstract class InitService {
 
     if (uri.isEmpty) {
       throw LicenseCheckerFlutterException(
-        message: 'Please Provide LICENSE_CHECKER_JSON_URL in env or init method',
+        message:
+            'Please Provide LICENSE_CHECKER_JSON_URL in env or init method',
         type: LicenseCheckerExceptionType.VALUE_NOT_FOUND,
       );
     }
@@ -43,7 +44,8 @@ abstract class InitService {
 
     if (name.isEmpty) {
       throw LicenseCheckerFlutterException(
-        message: 'Please Provide LICENSE_CHECKER_APP_NAME in env or init method',
+        message:
+            'Please Provide LICENSE_CHECKER_APP_NAME in env or init method',
         type: LicenseCheckerExceptionType.VALUE_NOT_FOUND,
       );
     }
@@ -69,7 +71,8 @@ abstract class InitService {
 
     if (licenseCheckerVersion <= 0) {
       throw LicenseCheckerFlutterException(
-        message: 'Please Provide non-zero LICENSE_CHECKER_VERSION in env or init method',
+        message:
+            'Please Provide non-zero LICENSE_CHECKER_VERSION in env or init method',
         type: LicenseCheckerExceptionType.VALUE_NOT_FOUND,
       );
     }
@@ -92,7 +95,8 @@ abstract class InitService {
 
     if (decrement == null) {
       throw LicenseCheckerFlutterException(
-        message: 'Please Provide LICENSE_CHECKER_AUTO_DECREMENT in env or init method',
+        message:
+            'Please Provide LICENSE_CHECKER_AUTO_DECREMENT in env or init method',
         type: LicenseCheckerExceptionType.VALUE_NOT_FOUND,
       );
     }

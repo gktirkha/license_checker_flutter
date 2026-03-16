@@ -24,13 +24,17 @@ typedef OnAppNotFound = Function();
 ///
 /// This function is invoked when the application is in a paid state,
 /// providing the relevant payment model.
-typedef OnPaid = Function(LicenseCheckerPaymentModel licenseCheckerPaymentModel);
+typedef OnPaid = Function(
+  LicenseCheckerPaymentModel licenseCheckerPaymentModel,
+);
 
 /// Callback type for handling unpaid application status.
 ///
 /// This function is invoked when the application is in an unpaid state,
 /// providing the relevant payment model.
-typedef OnUnPaid = Function(LicenseCheckerPaymentModel licenseCheckerPaymentModel);
+typedef OnUnPaid = Function(
+  LicenseCheckerPaymentModel licenseCheckerPaymentModel,
+);
 
 /// Callback type for handling limited launch scenarios.
 ///

@@ -1,5 +1,5 @@
 // ignore_for_file: constant_identifier_names
-library license_checker_flutter;
+library;
 
 /// Enumeration representing the possible payment statuses of an application.
 enum PaymentStatus {

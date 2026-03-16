@@ -2,7 +2,7 @@
 ///
 /// This library provides functionality for managing payment statuses,
 /// handling exceptions, and working with application configuration.
-library license_checker_flutter;
+library;
 
 export './src/exception/license_checker_flutter_exception.dart';
 export './src/model/payment_status_model.dart';

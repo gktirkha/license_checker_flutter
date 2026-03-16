@@ -62,7 +62,8 @@ abstract class LicenseCheckerFlutter {
     _showApiLogs = showApiLogs;
     _jsonUrl = InitService.initializeUrl(jsonUrl);
     _appName = InitService.initializeAppName(appName);
-    _autoDecrementLaunchCount = InitService.initializeAutoDecrement(autoDecrementLaunchCount);
+    _autoDecrementLaunchCount =
+        InitService.initializeAutoDecrement(autoDecrementLaunchCount);
     _version = InitService.initializeVersion(version);
     await StorageService.init();
     await StorageService.setConfig(_version, _appName);
@@ -82,7 +83,8 @@ abstract class LicenseCheckerFlutter {
   static Future<void> decrementCount() => StorageService.decrementCount();
 
   static Future<bool> _shouldCheckOnline() async {
-    final LicenseCheckerPaymentModel? licenseCheckerPaymentModel = await StorageService.getPaymentModel();
+    final LicenseCheckerPaymentModel? licenseCheckerPaymentModel =
+        await StorageService.getPaymentModel();
     if (licenseCheckerPaymentModel == null) {
       return true;
     }
@@ -110,7 +112,9 @@ abstract class LicenseCheckerFlutter {
         if (expiryDate == null) {
           return true;
         }
-        if (warningDate != null && now.isAfter(warningDate) && now.isBefore(expiryDate)) {
+        if (warningDate != null &&
+            now.isAfter(warningDate) &&
+            now.isBefore(expiryDate)) {
           return true;
         } else {
           return now.isAfter(expiryDate);
@@ -154,7 +158,8 @@ abstract class LicenseCheckerFlutter {
       ))
           .data;
 
-      final LicenseCheckerApiResponseModel apiResponseModel = LicenseCheckerApiResponseModel.fromJson(
+      final LicenseCheckerApiResponseModel apiResponseModel =
+          LicenseCheckerApiResponseModel.fromJson(
         res is Map ? res : jsonDecode(res),
       );
       return apiResponseModel.apps?[_appName];
@@ -233,7 +238,8 @@ abstract class LicenseCheckerFlutter {
   }) async {
     try {
       final bool shouldCheckOnline = await _shouldCheckOnline();
-      LicenseCheckerPaymentModel? storedModel = await StorageService.getPaymentModel();
+      LicenseCheckerPaymentModel? storedModel =
+          await StorageService.getPaymentModel();
       final LicenseCheckerPaymentModel? operationModel = shouldCheckOnline
           ? await _onlineModel(
               httpHeaders: httpHeaders ?? {},
@@ -293,8 +299,12 @@ abstract class LicenseCheckerFlutter {
         onTargetVersionMisMatch: onTargetVersionMisMatch,
       );
     } catch (e) {
-      final LicenseCheckerPaymentModel? operationModel = await StorageService.getPaymentModel();
-      if (useCachedConfigOnNetworkException && operationModel != null && e is LicenseCheckerFlutterException && e.type == LicenseCheckerExceptionType.NETWORK_EXCEPTION) {
+      final LicenseCheckerPaymentModel? operationModel =
+          await StorageService.getPaymentModel();
+      if (useCachedConfigOnNetworkException &&
+          operationModel != null &&
+          e is LicenseCheckerFlutterException &&
+          e.type == LicenseCheckerExceptionType.NETWORK_EXCEPTION) {
         _handleExecution(
           onPaid: onPaid,
           onTrial: onTrial,
@@ -356,14 +366,16 @@ abstract class LicenseCheckerFlutter {
 
           if (allowedLaunches == null) {
             throw LicenseCheckerFlutterException(
-              message: 'max_launch not set for ALLOW_LIMITED_LAUNCHES mechanism in remote json file',
+              message:
+                  'max_launch not set for ALLOW_LIMITED_LAUNCHES mechanism in remote json file',
               type: LicenseCheckerExceptionType.CONFIGURATION_EXCEPTION,
               operationConfiguration: operationModel,
             );
           }
 
           if (isOnlineModel) {
-            if (!operationModel.strictMaxLaunch || (currentLaunchCount == null)) {
+            if (!operationModel.strictMaxLaunch ||
+                (currentLaunchCount == null)) {
               StorageService.setLaunchCount(allowedLaunches);
             }
           }
@@ -396,11 +408,14 @@ abstract class LicenseCheckerFlutter {
           final expiryDate = operationModel.expireDateTime;
           if (expiryDate == null) {
             throw LicenseCheckerFlutterException(
-              message: 'expire_date not set for ON_TRIAL mechanism in remote json file',
+              message:
+                  'expire_date not set for ON_TRIAL mechanism in remote json file',
               type: LicenseCheckerExceptionType.CONFIGURATION_EXCEPTION,
             );
           }
-          if (warningDate != null && now.isAfter(warningDate) && now.isBefore(expiryDate)) {
+          if (warningDate != null &&
+              now.isAfter(warningDate) &&
+              now.isBefore(expiryDate)) {
             if (onTrialWarning != null) {
               onTrialWarning(operationModel, expiryDate, warningDate);
             } else {
@@ -423,7 +438,8 @@ abstract class LicenseCheckerFlutter {
 
         case null:
           LicenseCheckerFlutterException(
-            message: 'UNKNOWN_PAYMENT_STATUS, Please Make Sure that Payment status in json is one of following\nPAID\nUNPAID\nALLOW_LIMITED_LAUNCHES\nON_TRIAL,',
+            message:
+                'UNKNOWN_PAYMENT_STATUS, Please Make Sure that Payment status in json is one of following\nPAID\nUNPAID\nALLOW_LIMITED_LAUNCHES\nON_TRIAL,',
             type: LicenseCheckerExceptionType.UNKNOWN_PAYMENT_STATUS,
             operationConfiguration: operationModel,
           );

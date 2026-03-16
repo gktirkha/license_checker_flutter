@@ -53,7 +53,9 @@ class LicenseCheckerPaymentModel with _$LicenseCheckerPaymentModel {
   const factory LicenseCheckerPaymentModel({
     @JsonKey(name: 'status') PaymentStatus? status,
     @JsonKey(name: 'target_version') double? targetVersion,
-    @Default(false) @JsonKey(name: 'should_check_after_paid') bool shouldCheckAfterPaid,
+    @Default(false)
+    @JsonKey(name: 'should_check_after_paid')
+    bool shouldCheckAfterPaid,
     @Default(false) @JsonKey(name: 'check_during_trial') bool checkDuringTrial,
     @JsonKey(name: 'expire_date') DateTime? expireDateTime,
     @JsonKey(name: 'warning_date') DateTime? warningDate,
@@ -66,5 +68,6 @@ class LicenseCheckerPaymentModel with _$LicenseCheckerPaymentModel {
   /// Creates a [LicenseCheckerPaymentModel] from a JSON map.
   ///
   /// [json] - The JSON map containing the payment model data.
-  factory LicenseCheckerPaymentModel.fromJson(Map<String, dynamic> json) => _$LicenseCheckerPaymentModelFromJson(json);
+  factory LicenseCheckerPaymentModel.fromJson(Map<String, dynamic> json) =>
+      _$LicenseCheckerPaymentModelFromJson(json);
 }
