@@ -34,8 +34,6 @@ A hosted json file in following [format](https://raw.githubusercontent.com/gktir
 
 # Usage
 
-> Please Refer To dart [Dart Doc Version](https://gktirkha.github.io/flutter_packages_doc/license_checker_flutter)
-
 1. add dependency
 
     ``` yaml

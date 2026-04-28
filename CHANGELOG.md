@@ -22,3 +22,5 @@ LICENSE update
 Migrations
 ## 1.0.4
 Dependencies Update
+## 1.0.5
+Update Readme
