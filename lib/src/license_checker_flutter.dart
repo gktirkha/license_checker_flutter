@@ -5,7 +5,6 @@ import 'package:dio/dio.dart';
 
 import 'constants/license_checker_flutter_type_definitions.dart';
 import 'constants/on_unhandled_reason.dart';
-import 'constants/payment_status.dart';
 import 'exception/license_checker_flutter_exception.dart';
 import 'model/payment_status_model.dart';
 import 'services/init_service.dart';
@@ -62,8 +61,9 @@ abstract class LicenseCheckerFlutter {
     _showApiLogs = showApiLogs;
     _jsonUrl = InitService.initializeUrl(jsonUrl);
     _appName = InitService.initializeAppName(appName);
-    _autoDecrementLaunchCount =
-        InitService.initializeAutoDecrement(autoDecrementLaunchCount);
+    _autoDecrementLaunchCount = InitService.initializeAutoDecrement(
+      autoDecrementLaunchCount,
+    );
     _version = InitService.initializeVersion(version);
     await StorageService.init();
     await StorageService.setConfig(_version, _appName);
@@ -92,17 +92,17 @@ abstract class LicenseCheckerFlutter {
       return true;
     }
     switch (licenseCheckerPaymentModel.status) {
-      case PaymentStatus.PAID:
+      case .PAID:
         return licenseCheckerPaymentModel.shouldCheckAfterPaid;
 
-      case PaymentStatus.UNPAID:
+      case .UNPAID:
         return true;
 
-      case PaymentStatus.ALLOW_LIMITED_LAUNCHES:
+      case .ALLOW_LIMITED_LAUNCHES:
         final currentCount = await StorageService.getLaunchCount();
         return (currentCount == null || currentCount <= 0);
 
-      case PaymentStatus.ON_TRIAL:
+      case .ON_TRIAL:
         if (licenseCheckerPaymentModel.checkDuringTrial == true) {
           return true;
         }
@@ -149,31 +149,28 @@ abstract class LicenseCheckerFlutter {
 
       final res = (await dioClient.request(
         _jsonUrl,
-        options: Options(
-          headers: httpHeaders,
-          method: httpMethod,
-        ),
+        options: Options(headers: httpHeaders, method: httpMethod),
         queryParameters: httpQueryParameters,
         data: httpRequestBody,
-      ))
-          .data;
+      )).data;
 
       final LicenseCheckerApiResponseModel apiResponseModel =
           LicenseCheckerApiResponseModel.fromJson(
-        res is Map ? res : jsonDecode(res),
-      );
+            res is Map ? res : jsonDecode(res),
+          );
       return apiResponseModel.apps?[_appName];
     } catch (e) {
       if (e is DioException) {
         final String message = switch (e.type) {
-          DioExceptionType.connectionTimeout => 'CONNECTION TIME_OUT',
-          DioExceptionType.sendTimeout => 'SEND TIME_OUT',
-          DioExceptionType.receiveTimeout => 'RECEIVE TIME_OUT',
-          DioExceptionType.badCertificate => 'BAD_CERTIFICATE',
-          DioExceptionType.badResponse => 'BAD_RESPONSE',
-          DioExceptionType.cancel => 'CANCEL',
-          DioExceptionType.connectionError => 'CONNECTION_ERROR',
-          DioExceptionType.unknown => 'UNKNOWN',
+          .connectionTimeout => 'CONNECTION TIME_OUT',
+          .sendTimeout => 'SEND TIME_OUT',
+          .receiveTimeout => 'RECEIVE TIME_OUT',
+          .badCertificate => 'BAD_CERTIFICATE',
+          .badResponse => 'BAD_RESPONSE',
+          .cancel => 'CANCEL',
+          .connectionError => 'CONNECTION_ERROR',
+          .unknown => 'UNKNOWN',
+          .transformTimeout => 'TIMEOUT',
         };
 
         throw LicenseCheckerFlutterException(
@@ -344,7 +341,7 @@ abstract class LicenseCheckerFlutter {
   }) async {
     try {
       switch (operationModel.status) {
-        case PaymentStatus.PAID:
+        case .PAID:
           if (onPaid != null) {
             onPaid(operationModel);
           } else {
@@ -352,7 +349,7 @@ abstract class LicenseCheckerFlutter {
           }
           break;
 
-        case PaymentStatus.UNPAID:
+        case .UNPAID:
           if (onUnPaid != null) {
             onUnPaid(operationModel);
           } else {
@@ -360,7 +357,7 @@ abstract class LicenseCheckerFlutter {
           }
           break;
 
-        case PaymentStatus.ALLOW_LIMITED_LAUNCHES:
+        case .ALLOW_LIMITED_LAUNCHES:
           final allowedLaunches = operationModel.maxLaunch;
           int? currentLaunchCount = await StorageService.getLaunchCount();
 
@@ -402,7 +399,7 @@ abstract class LicenseCheckerFlutter {
 
           break;
 
-        case PaymentStatus.ON_TRIAL:
+        case .ON_TRIAL:
           final now = DateTime.now();
           final warningDate = operationModel.warningDate;
           final expiryDate = operationModel.expireDateTime;

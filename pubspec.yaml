@@ -1,25 +1,25 @@
 name: license_checker_flutter
-version: 1.0.5
+version: 1.0.6
 homepage: https://github.com/gktirkha/license_checker_flutter/
 repository: https://github.com/gktirkha/license_checker_flutter/
 description: LicenseCheckerFlutter simplifies payment management in Flutter apps, providing status checks, trial handling, and customizable callbacks for an improved user experience.
 
 environment:
-  sdk: ^3.5.2
+  sdk: ^3.12.2
   flutter: ">=1.17.0"
 
 dependencies:
-  dio: ^5.9.2
+  dio: ^5.10.0
   flutter:
     sdk: flutter
   freezed_annotation: ^3.1.0
-  json_annotation: ^4.11.0
-  shared_preferences: ^2.5.4
+  json_annotation: ^4.12.0
+  shared_preferences: ^2.5.5
 
 dev_dependencies:
-  build_runner: ^2.12.2
+  build_runner: ^2.15.0
   flutter_lints: ^6.0.0
   flutter_test:
     sdk: flutter
   freezed: ^3.2.5
-  json_serializable: ^6.13.0
+  json_serializable: ^6.14.0

@@ -61,7 +61,8 @@ abstract class InitService {
   /// Returns:
   /// - A [double] representing the non-zero version.
   static double initializeVersion(double? version) {
-    double licenseCheckerVersion = double.tryParse(
+    double licenseCheckerVersion =
+        double.tryParse(
           String.fromEnvironment(
             'LICENSE_CHECKER_VERSION',
             defaultValue: version?.toString() ?? '0.0',

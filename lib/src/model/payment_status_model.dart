@@ -24,9 +24,7 @@ class LicenseCheckerApiResponseModel with _$LicenseCheckerApiResponseModel {
   /// Creates a [LicenseCheckerApiResponseModel] from a JSON map.
   ///
   /// [json] - The JSON map containing the payment status data.
-  factory LicenseCheckerApiResponseModel.fromJson(
-    Map<String, dynamic> json,
-  ) =>
+  factory LicenseCheckerApiResponseModel.fromJson(Map<String, dynamic> json) =>
       _$LicenseCheckerApiResponseModelFromJson(json);
 }
 

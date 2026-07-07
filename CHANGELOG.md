@@ -24,3 +24,5 @@ Migrations
 Dependencies Update
 ## 1.0.5
 Update Readme
+## 1.0.6
+Update dependencies (dio, json_annotation, shared_preferences, build_runner, json_serializable), bump SDK to ^3.12.2, add DioExceptionType.transformTimeout handling, and apply dart format updates

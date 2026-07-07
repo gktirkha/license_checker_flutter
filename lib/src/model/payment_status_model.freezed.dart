@@ -12,10 +12,12 @@ part of 'payment_status_model.dart';
 T _$identity<T>(T value) => value;
 
 final _privateConstructorUsedError = UnsupportedError(
-    'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models');
+  'It seems like you constructed your class using `MyClass._()`. This constructor is only meant to be used by freezed and you are not supposed to need it nor use it.\nPlease check the documentation here for more information: https://github.com/rrousselGit/freezed#adding-getters-and-methods-to-our-models',
+);
 
 LicenseCheckerApiResponseModel _$LicenseCheckerApiResponseModelFromJson(
-    Map<String, dynamic> json) {
+  Map<String, dynamic> json,
+) {
   return _LicenseCheckerApiResponseModel.fromJson(json);
 }
 
@@ -32,24 +34,30 @@ mixin _$LicenseCheckerApiResponseModel {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   $LicenseCheckerApiResponseModelCopyWith<LicenseCheckerApiResponseModel>
-      get copyWith => throw _privateConstructorUsedError;
+  get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $LicenseCheckerApiResponseModelCopyWith<$Res> {
   factory $LicenseCheckerApiResponseModelCopyWith(
-          LicenseCheckerApiResponseModel value,
-          $Res Function(LicenseCheckerApiResponseModel) then) =
-      _$LicenseCheckerApiResponseModelCopyWithImpl<$Res,
-          LicenseCheckerApiResponseModel>;
+    LicenseCheckerApiResponseModel value,
+    $Res Function(LicenseCheckerApiResponseModel) then,
+  ) =
+      _$LicenseCheckerApiResponseModelCopyWithImpl<
+        $Res,
+        LicenseCheckerApiResponseModel
+      >;
   @useResult
-  $Res call(
-      {@JsonKey(name: 'apps') Map<String, LicenseCheckerPaymentModel>? apps});
+  $Res call({
+    @JsonKey(name: 'apps') Map<String, LicenseCheckerPaymentModel>? apps,
+  });
 }
 
 /// @nodoc
-class _$LicenseCheckerApiResponseModelCopyWithImpl<$Res,
-        $Val extends LicenseCheckerApiResponseModel>
+class _$LicenseCheckerApiResponseModelCopyWithImpl<
+  $Res,
+  $Val extends LicenseCheckerApiResponseModel
+>
     implements $LicenseCheckerApiResponseModelCopyWith<$Res> {
   _$LicenseCheckerApiResponseModelCopyWithImpl(this._value, this._then);
 
@@ -62,15 +70,16 @@ class _$LicenseCheckerApiResponseModelCopyWithImpl<$Res,
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? apps = freezed,
-  }) {
-    return _then(_value.copyWith(
-      apps: freezed == apps
-          ? _value.apps
-          : apps // ignore: cast_nullable_to_non_nullable
-              as Map<String, LicenseCheckerPaymentModel>?,
-    ) as $Val);
+  $Res call({Object? apps = freezed}) {
+    return _then(
+      _value.copyWith(
+            apps: freezed == apps
+                ? _value.apps
+                : apps // ignore: cast_nullable_to_non_nullable
+                      as Map<String, LicenseCheckerPaymentModel>?,
+          )
+          as $Val,
+    );
   }
 }
 
@@ -78,38 +87,42 @@ class _$LicenseCheckerApiResponseModelCopyWithImpl<$Res,
 abstract class _$$LicenseCheckerApiResponseModelImplCopyWith<$Res>
     implements $LicenseCheckerApiResponseModelCopyWith<$Res> {
   factory _$$LicenseCheckerApiResponseModelImplCopyWith(
-          _$LicenseCheckerApiResponseModelImpl value,
-          $Res Function(_$LicenseCheckerApiResponseModelImpl) then) =
-      __$$LicenseCheckerApiResponseModelImplCopyWithImpl<$Res>;
+    _$LicenseCheckerApiResponseModelImpl value,
+    $Res Function(_$LicenseCheckerApiResponseModelImpl) then,
+  ) = __$$LicenseCheckerApiResponseModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(name: 'apps') Map<String, LicenseCheckerPaymentModel>? apps});
+  $Res call({
+    @JsonKey(name: 'apps') Map<String, LicenseCheckerPaymentModel>? apps,
+  });
 }
 
 /// @nodoc
 class __$$LicenseCheckerApiResponseModelImplCopyWithImpl<$Res>
-    extends _$LicenseCheckerApiResponseModelCopyWithImpl<$Res,
-        _$LicenseCheckerApiResponseModelImpl>
+    extends
+        _$LicenseCheckerApiResponseModelCopyWithImpl<
+          $Res,
+          _$LicenseCheckerApiResponseModelImpl
+        >
     implements _$$LicenseCheckerApiResponseModelImplCopyWith<$Res> {
   __$$LicenseCheckerApiResponseModelImplCopyWithImpl(
-      _$LicenseCheckerApiResponseModelImpl _value,
-      $Res Function(_$LicenseCheckerApiResponseModelImpl) _then)
-      : super(_value, _then);
+    _$LicenseCheckerApiResponseModelImpl _value,
+    $Res Function(_$LicenseCheckerApiResponseModelImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of LicenseCheckerApiResponseModel
   /// with the given fields replaced by the non-null parameter values.
   @pragma('vm:prefer-inline')
   @override
-  $Res call({
-    Object? apps = freezed,
-  }) {
-    return _then(_$LicenseCheckerApiResponseModelImpl(
-      apps: freezed == apps
-          ? _value._apps
-          : apps // ignore: cast_nullable_to_non_nullable
-              as Map<String, LicenseCheckerPaymentModel>?,
-    ));
+  $Res call({Object? apps = freezed}) {
+    return _then(
+      _$LicenseCheckerApiResponseModelImpl(
+        apps: freezed == apps
+            ? _value._apps
+            : apps // ignore: cast_nullable_to_non_nullable
+                  as Map<String, LicenseCheckerPaymentModel>?,
+      ),
+    );
   }
 }
 
@@ -117,14 +130,13 @@ class __$$LicenseCheckerApiResponseModelImplCopyWithImpl<$Res>
 @JsonSerializable()
 class _$LicenseCheckerApiResponseModelImpl
     implements _LicenseCheckerApiResponseModel {
-  const _$LicenseCheckerApiResponseModelImpl(
-      {@JsonKey(name: 'apps')
-      final Map<String, LicenseCheckerPaymentModel>? apps})
-      : _apps = apps;
+  const _$LicenseCheckerApiResponseModelImpl({
+    @JsonKey(name: 'apps') final Map<String, LicenseCheckerPaymentModel>? apps,
+  }) : _apps = apps;
 
   factory _$LicenseCheckerApiResponseModelImpl.fromJson(
-          Map<String, dynamic> json) =>
-      _$$LicenseCheckerApiResponseModelImplFromJson(json);
+    Map<String, dynamic> json,
+  ) => _$$LicenseCheckerApiResponseModelImplFromJson(json);
 
   final Map<String, LicenseCheckerPaymentModel>? _apps;
   @override
@@ -161,24 +173,24 @@ class _$LicenseCheckerApiResponseModelImpl
   @override
   @pragma('vm:prefer-inline')
   _$$LicenseCheckerApiResponseModelImplCopyWith<
-          _$LicenseCheckerApiResponseModelImpl>
-      get copyWith => __$$LicenseCheckerApiResponseModelImplCopyWithImpl<
-          _$LicenseCheckerApiResponseModelImpl>(this, _$identity);
+    _$LicenseCheckerApiResponseModelImpl
+  >
+  get copyWith =>
+      __$$LicenseCheckerApiResponseModelImplCopyWithImpl<
+        _$LicenseCheckerApiResponseModelImpl
+      >(this, _$identity);
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$LicenseCheckerApiResponseModelImplToJson(
-      this,
-    );
+    return _$$LicenseCheckerApiResponseModelImplToJson(this);
   }
 }
 
 abstract class _LicenseCheckerApiResponseModel
     implements LicenseCheckerApiResponseModel {
-  const factory _LicenseCheckerApiResponseModel(
-          {@JsonKey(name: 'apps')
-          final Map<String, LicenseCheckerPaymentModel>? apps}) =
-      _$LicenseCheckerApiResponseModelImpl;
+  const factory _LicenseCheckerApiResponseModel({
+    @JsonKey(name: 'apps') final Map<String, LicenseCheckerPaymentModel>? apps,
+  }) = _$LicenseCheckerApiResponseModelImpl;
 
   factory _LicenseCheckerApiResponseModel.fromJson(Map<String, dynamic> json) =
       _$LicenseCheckerApiResponseModelImpl.fromJson;
@@ -192,12 +204,14 @@ abstract class _LicenseCheckerApiResponseModel
   @override
   @JsonKey(includeFromJson: false, includeToJson: false)
   _$$LicenseCheckerApiResponseModelImplCopyWith<
-          _$LicenseCheckerApiResponseModelImpl>
-      get copyWith => throw _privateConstructorUsedError;
+    _$LicenseCheckerApiResponseModelImpl
+  >
+  get copyWith => throw _privateConstructorUsedError;
 }
 
 LicenseCheckerPaymentModel _$LicenseCheckerPaymentModelFromJson(
-    Map<String, dynamic> json) {
+  Map<String, dynamic> json,
+) {
   return _AppPaymentModel.fromJson(json);
 }
 
@@ -233,34 +247,39 @@ mixin _$LicenseCheckerPaymentModel {
   /// with the given fields replaced by the non-null parameter values.
   @JsonKey(includeFromJson: false, includeToJson: false)
   $LicenseCheckerPaymentModelCopyWith<LicenseCheckerPaymentModel>
-      get copyWith => throw _privateConstructorUsedError;
+  get copyWith => throw _privateConstructorUsedError;
 }
 
 /// @nodoc
 abstract class $LicenseCheckerPaymentModelCopyWith<$Res> {
-  factory $LicenseCheckerPaymentModelCopyWith(LicenseCheckerPaymentModel value,
-          $Res Function(LicenseCheckerPaymentModel) then) =
-      _$LicenseCheckerPaymentModelCopyWithImpl<$Res,
-          LicenseCheckerPaymentModel>;
+  factory $LicenseCheckerPaymentModelCopyWith(
+    LicenseCheckerPaymentModel value,
+    $Res Function(LicenseCheckerPaymentModel) then,
+  ) =
+      _$LicenseCheckerPaymentModelCopyWithImpl<
+        $Res,
+        LicenseCheckerPaymentModel
+      >;
   @useResult
-  $Res call(
-      {@JsonKey(name: 'status') PaymentStatus? status,
-      @JsonKey(name: 'target_version') double? targetVersion,
-      @JsonKey(name: 'should_check_after_paid') bool shouldCheckAfterPaid,
-      @JsonKey(name: 'check_during_trial') bool checkDuringTrial,
-      @JsonKey(name: 'expire_date') DateTime? expireDateTime,
-      @JsonKey(name: 'warning_date') DateTime? warningDate,
-      @JsonKey(name: 'strict_max_launch') bool strictMaxLaunch,
-      @JsonKey(name: 'max_launch') int? maxLaunch,
-      @JsonKey(name: 'developer_details')
-      Map<String, dynamic>? developerDetails,
-      @JsonKey(name: 'additional_fields')
-      Map<String, dynamic>? additionalFields});
+  $Res call({
+    @JsonKey(name: 'status') PaymentStatus? status,
+    @JsonKey(name: 'target_version') double? targetVersion,
+    @JsonKey(name: 'should_check_after_paid') bool shouldCheckAfterPaid,
+    @JsonKey(name: 'check_during_trial') bool checkDuringTrial,
+    @JsonKey(name: 'expire_date') DateTime? expireDateTime,
+    @JsonKey(name: 'warning_date') DateTime? warningDate,
+    @JsonKey(name: 'strict_max_launch') bool strictMaxLaunch,
+    @JsonKey(name: 'max_launch') int? maxLaunch,
+    @JsonKey(name: 'developer_details') Map<String, dynamic>? developerDetails,
+    @JsonKey(name: 'additional_fields') Map<String, dynamic>? additionalFields,
+  });
 }
 
 /// @nodoc
-class _$LicenseCheckerPaymentModelCopyWithImpl<$Res,
-        $Val extends LicenseCheckerPaymentModel>
+class _$LicenseCheckerPaymentModelCopyWithImpl<
+  $Res,
+  $Val extends LicenseCheckerPaymentModel
+>
     implements $LicenseCheckerPaymentModelCopyWith<$Res> {
   _$LicenseCheckerPaymentModelCopyWithImpl(this._value, this._then);
 
@@ -285,81 +304,86 @@ class _$LicenseCheckerPaymentModelCopyWithImpl<$Res,
     Object? developerDetails = freezed,
     Object? additionalFields = freezed,
   }) {
-    return _then(_value.copyWith(
-      status: freezed == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as PaymentStatus?,
-      targetVersion: freezed == targetVersion
-          ? _value.targetVersion
-          : targetVersion // ignore: cast_nullable_to_non_nullable
-              as double?,
-      shouldCheckAfterPaid: null == shouldCheckAfterPaid
-          ? _value.shouldCheckAfterPaid
-          : shouldCheckAfterPaid // ignore: cast_nullable_to_non_nullable
-              as bool,
-      checkDuringTrial: null == checkDuringTrial
-          ? _value.checkDuringTrial
-          : checkDuringTrial // ignore: cast_nullable_to_non_nullable
-              as bool,
-      expireDateTime: freezed == expireDateTime
-          ? _value.expireDateTime
-          : expireDateTime // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      warningDate: freezed == warningDate
-          ? _value.warningDate
-          : warningDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      strictMaxLaunch: null == strictMaxLaunch
-          ? _value.strictMaxLaunch
-          : strictMaxLaunch // ignore: cast_nullable_to_non_nullable
-              as bool,
-      maxLaunch: freezed == maxLaunch
-          ? _value.maxLaunch
-          : maxLaunch // ignore: cast_nullable_to_non_nullable
-              as int?,
-      developerDetails: freezed == developerDetails
-          ? _value.developerDetails
-          : developerDetails // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-      additionalFields: freezed == additionalFields
-          ? _value.additionalFields
-          : additionalFields // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-    ) as $Val);
+    return _then(
+      _value.copyWith(
+            status: freezed == status
+                ? _value.status
+                : status // ignore: cast_nullable_to_non_nullable
+                      as PaymentStatus?,
+            targetVersion: freezed == targetVersion
+                ? _value.targetVersion
+                : targetVersion // ignore: cast_nullable_to_non_nullable
+                      as double?,
+            shouldCheckAfterPaid: null == shouldCheckAfterPaid
+                ? _value.shouldCheckAfterPaid
+                : shouldCheckAfterPaid // ignore: cast_nullable_to_non_nullable
+                      as bool,
+            checkDuringTrial: null == checkDuringTrial
+                ? _value.checkDuringTrial
+                : checkDuringTrial // ignore: cast_nullable_to_non_nullable
+                      as bool,
+            expireDateTime: freezed == expireDateTime
+                ? _value.expireDateTime
+                : expireDateTime // ignore: cast_nullable_to_non_nullable
+                      as DateTime?,
+            warningDate: freezed == warningDate
+                ? _value.warningDate
+                : warningDate // ignore: cast_nullable_to_non_nullable
+                      as DateTime?,
+            strictMaxLaunch: null == strictMaxLaunch
+                ? _value.strictMaxLaunch
+                : strictMaxLaunch // ignore: cast_nullable_to_non_nullable
+                      as bool,
+            maxLaunch: freezed == maxLaunch
+                ? _value.maxLaunch
+                : maxLaunch // ignore: cast_nullable_to_non_nullable
+                      as int?,
+            developerDetails: freezed == developerDetails
+                ? _value.developerDetails
+                : developerDetails // ignore: cast_nullable_to_non_nullable
+                      as Map<String, dynamic>?,
+            additionalFields: freezed == additionalFields
+                ? _value.additionalFields
+                : additionalFields // ignore: cast_nullable_to_non_nullable
+                      as Map<String, dynamic>?,
+          )
+          as $Val,
+    );
   }
 }
 
 /// @nodoc
 abstract class _$$AppPaymentModelImplCopyWith<$Res>
     implements $LicenseCheckerPaymentModelCopyWith<$Res> {
-  factory _$$AppPaymentModelImplCopyWith(_$AppPaymentModelImpl value,
-          $Res Function(_$AppPaymentModelImpl) then) =
-      __$$AppPaymentModelImplCopyWithImpl<$Res>;
+  factory _$$AppPaymentModelImplCopyWith(
+    _$AppPaymentModelImpl value,
+    $Res Function(_$AppPaymentModelImpl) then,
+  ) = __$$AppPaymentModelImplCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call(
-      {@JsonKey(name: 'status') PaymentStatus? status,
-      @JsonKey(name: 'target_version') double? targetVersion,
-      @JsonKey(name: 'should_check_after_paid') bool shouldCheckAfterPaid,
-      @JsonKey(name: 'check_during_trial') bool checkDuringTrial,
-      @JsonKey(name: 'expire_date') DateTime? expireDateTime,
-      @JsonKey(name: 'warning_date') DateTime? warningDate,
-      @JsonKey(name: 'strict_max_launch') bool strictMaxLaunch,
-      @JsonKey(name: 'max_launch') int? maxLaunch,
-      @JsonKey(name: 'developer_details')
-      Map<String, dynamic>? developerDetails,
-      @JsonKey(name: 'additional_fields')
-      Map<String, dynamic>? additionalFields});
+  $Res call({
+    @JsonKey(name: 'status') PaymentStatus? status,
+    @JsonKey(name: 'target_version') double? targetVersion,
+    @JsonKey(name: 'should_check_after_paid') bool shouldCheckAfterPaid,
+    @JsonKey(name: 'check_during_trial') bool checkDuringTrial,
+    @JsonKey(name: 'expire_date') DateTime? expireDateTime,
+    @JsonKey(name: 'warning_date') DateTime? warningDate,
+    @JsonKey(name: 'strict_max_launch') bool strictMaxLaunch,
+    @JsonKey(name: 'max_launch') int? maxLaunch,
+    @JsonKey(name: 'developer_details') Map<String, dynamic>? developerDetails,
+    @JsonKey(name: 'additional_fields') Map<String, dynamic>? additionalFields,
+  });
 }
 
 /// @nodoc
 class __$$AppPaymentModelImplCopyWithImpl<$Res>
-    extends _$LicenseCheckerPaymentModelCopyWithImpl<$Res,
-        _$AppPaymentModelImpl> implements _$$AppPaymentModelImplCopyWith<$Res> {
+    extends
+        _$LicenseCheckerPaymentModelCopyWithImpl<$Res, _$AppPaymentModelImpl>
+    implements _$$AppPaymentModelImplCopyWith<$Res> {
   __$$AppPaymentModelImplCopyWithImpl(
-      _$AppPaymentModelImpl _value, $Res Function(_$AppPaymentModelImpl) _then)
-      : super(_value, _then);
+    _$AppPaymentModelImpl _value,
+    $Res Function(_$AppPaymentModelImpl) _then,
+  ) : super(_value, _then);
 
   /// Create a copy of LicenseCheckerPaymentModel
   /// with the given fields replaced by the non-null parameter values.
@@ -377,70 +401,71 @@ class __$$AppPaymentModelImplCopyWithImpl<$Res>
     Object? developerDetails = freezed,
     Object? additionalFields = freezed,
   }) {
-    return _then(_$AppPaymentModelImpl(
-      status: freezed == status
-          ? _value.status
-          : status // ignore: cast_nullable_to_non_nullable
-              as PaymentStatus?,
-      targetVersion: freezed == targetVersion
-          ? _value.targetVersion
-          : targetVersion // ignore: cast_nullable_to_non_nullable
-              as double?,
-      shouldCheckAfterPaid: null == shouldCheckAfterPaid
-          ? _value.shouldCheckAfterPaid
-          : shouldCheckAfterPaid // ignore: cast_nullable_to_non_nullable
-              as bool,
-      checkDuringTrial: null == checkDuringTrial
-          ? _value.checkDuringTrial
-          : checkDuringTrial // ignore: cast_nullable_to_non_nullable
-              as bool,
-      expireDateTime: freezed == expireDateTime
-          ? _value.expireDateTime
-          : expireDateTime // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      warningDate: freezed == warningDate
-          ? _value.warningDate
-          : warningDate // ignore: cast_nullable_to_non_nullable
-              as DateTime?,
-      strictMaxLaunch: null == strictMaxLaunch
-          ? _value.strictMaxLaunch
-          : strictMaxLaunch // ignore: cast_nullable_to_non_nullable
-              as bool,
-      maxLaunch: freezed == maxLaunch
-          ? _value.maxLaunch
-          : maxLaunch // ignore: cast_nullable_to_non_nullable
-              as int?,
-      developerDetails: freezed == developerDetails
-          ? _value._developerDetails
-          : developerDetails // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-      additionalFields: freezed == additionalFields
-          ? _value._additionalFields
-          : additionalFields // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
-    ));
+    return _then(
+      _$AppPaymentModelImpl(
+        status: freezed == status
+            ? _value.status
+            : status // ignore: cast_nullable_to_non_nullable
+                  as PaymentStatus?,
+        targetVersion: freezed == targetVersion
+            ? _value.targetVersion
+            : targetVersion // ignore: cast_nullable_to_non_nullable
+                  as double?,
+        shouldCheckAfterPaid: null == shouldCheckAfterPaid
+            ? _value.shouldCheckAfterPaid
+            : shouldCheckAfterPaid // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        checkDuringTrial: null == checkDuringTrial
+            ? _value.checkDuringTrial
+            : checkDuringTrial // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        expireDateTime: freezed == expireDateTime
+            ? _value.expireDateTime
+            : expireDateTime // ignore: cast_nullable_to_non_nullable
+                  as DateTime?,
+        warningDate: freezed == warningDate
+            ? _value.warningDate
+            : warningDate // ignore: cast_nullable_to_non_nullable
+                  as DateTime?,
+        strictMaxLaunch: null == strictMaxLaunch
+            ? _value.strictMaxLaunch
+            : strictMaxLaunch // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        maxLaunch: freezed == maxLaunch
+            ? _value.maxLaunch
+            : maxLaunch // ignore: cast_nullable_to_non_nullable
+                  as int?,
+        developerDetails: freezed == developerDetails
+            ? _value._developerDetails
+            : developerDetails // ignore: cast_nullable_to_non_nullable
+                  as Map<String, dynamic>?,
+        additionalFields: freezed == additionalFields
+            ? _value._additionalFields
+            : additionalFields // ignore: cast_nullable_to_non_nullable
+                  as Map<String, dynamic>?,
+      ),
+    );
   }
 }
 
 /// @nodoc
 @JsonSerializable()
 class _$AppPaymentModelImpl implements _AppPaymentModel {
-  const _$AppPaymentModelImpl(
-      {@JsonKey(name: 'status') this.status,
-      @JsonKey(name: 'target_version') this.targetVersion,
-      @JsonKey(name: 'should_check_after_paid')
-      this.shouldCheckAfterPaid = false,
-      @JsonKey(name: 'check_during_trial') this.checkDuringTrial = false,
-      @JsonKey(name: 'expire_date') this.expireDateTime,
-      @JsonKey(name: 'warning_date') this.warningDate,
-      @JsonKey(name: 'strict_max_launch') this.strictMaxLaunch = true,
-      @JsonKey(name: 'max_launch') this.maxLaunch,
-      @JsonKey(name: 'developer_details')
-      final Map<String, dynamic>? developerDetails,
-      @JsonKey(name: 'additional_fields')
-      final Map<String, dynamic>? additionalFields})
-      : _developerDetails = developerDetails,
-        _additionalFields = additionalFields;
+  const _$AppPaymentModelImpl({
+    @JsonKey(name: 'status') this.status,
+    @JsonKey(name: 'target_version') this.targetVersion,
+    @JsonKey(name: 'should_check_after_paid') this.shouldCheckAfterPaid = false,
+    @JsonKey(name: 'check_during_trial') this.checkDuringTrial = false,
+    @JsonKey(name: 'expire_date') this.expireDateTime,
+    @JsonKey(name: 'warning_date') this.warningDate,
+    @JsonKey(name: 'strict_max_launch') this.strictMaxLaunch = true,
+    @JsonKey(name: 'max_launch') this.maxLaunch,
+    @JsonKey(name: 'developer_details')
+    final Map<String, dynamic>? developerDetails,
+    @JsonKey(name: 'additional_fields')
+    final Map<String, dynamic>? additionalFields,
+  }) : _developerDetails = developerDetails,
+       _additionalFields = additionalFields;
 
   factory _$AppPaymentModelImpl.fromJson(Map<String, dynamic> json) =>
       _$$AppPaymentModelImplFromJson(json);
@@ -516,26 +541,31 @@ class _$AppPaymentModelImpl implements _AppPaymentModel {
                 other.strictMaxLaunch == strictMaxLaunch) &&
             (identical(other.maxLaunch, maxLaunch) ||
                 other.maxLaunch == maxLaunch) &&
-            const DeepCollectionEquality()
-                .equals(other._developerDetails, _developerDetails) &&
-            const DeepCollectionEquality()
-                .equals(other._additionalFields, _additionalFields));
+            const DeepCollectionEquality().equals(
+              other._developerDetails,
+              _developerDetails,
+            ) &&
+            const DeepCollectionEquality().equals(
+              other._additionalFields,
+              _additionalFields,
+            ));
   }
 
   @JsonKey(includeFromJson: false, includeToJson: false)
   @override
   int get hashCode => Object.hash(
-      runtimeType,
-      status,
-      targetVersion,
-      shouldCheckAfterPaid,
-      checkDuringTrial,
-      expireDateTime,
-      warningDate,
-      strictMaxLaunch,
-      maxLaunch,
-      const DeepCollectionEquality().hash(_developerDetails),
-      const DeepCollectionEquality().hash(_additionalFields));
+    runtimeType,
+    status,
+    targetVersion,
+    shouldCheckAfterPaid,
+    checkDuringTrial,
+    expireDateTime,
+    warningDate,
+    strictMaxLaunch,
+    maxLaunch,
+    const DeepCollectionEquality().hash(_developerDetails),
+    const DeepCollectionEquality().hash(_additionalFields),
+  );
 
   /// Create a copy of LicenseCheckerPaymentModel
   /// with the given fields replaced by the non-null parameter values.
@@ -544,30 +574,31 @@ class _$AppPaymentModelImpl implements _AppPaymentModel {
   @pragma('vm:prefer-inline')
   _$$AppPaymentModelImplCopyWith<_$AppPaymentModelImpl> get copyWith =>
       __$$AppPaymentModelImplCopyWithImpl<_$AppPaymentModelImpl>(
-          this, _$identity);
+        this,
+        _$identity,
+      );
 
   @override
   Map<String, dynamic> toJson() {
-    return _$$AppPaymentModelImplToJson(
-      this,
-    );
+    return _$$AppPaymentModelImplToJson(this);
   }
 }
 
 abstract class _AppPaymentModel implements LicenseCheckerPaymentModel {
-  const factory _AppPaymentModel(
-      {@JsonKey(name: 'status') final PaymentStatus? status,
-      @JsonKey(name: 'target_version') final double? targetVersion,
-      @JsonKey(name: 'should_check_after_paid') final bool shouldCheckAfterPaid,
-      @JsonKey(name: 'check_during_trial') final bool checkDuringTrial,
-      @JsonKey(name: 'expire_date') final DateTime? expireDateTime,
-      @JsonKey(name: 'warning_date') final DateTime? warningDate,
-      @JsonKey(name: 'strict_max_launch') final bool strictMaxLaunch,
-      @JsonKey(name: 'max_launch') final int? maxLaunch,
-      @JsonKey(name: 'developer_details')
-      final Map<String, dynamic>? developerDetails,
-      @JsonKey(name: 'additional_fields')
-      final Map<String, dynamic>? additionalFields}) = _$AppPaymentModelImpl;
+  const factory _AppPaymentModel({
+    @JsonKey(name: 'status') final PaymentStatus? status,
+    @JsonKey(name: 'target_version') final double? targetVersion,
+    @JsonKey(name: 'should_check_after_paid') final bool shouldCheckAfterPaid,
+    @JsonKey(name: 'check_during_trial') final bool checkDuringTrial,
+    @JsonKey(name: 'expire_date') final DateTime? expireDateTime,
+    @JsonKey(name: 'warning_date') final DateTime? warningDate,
+    @JsonKey(name: 'strict_max_launch') final bool strictMaxLaunch,
+    @JsonKey(name: 'max_launch') final int? maxLaunch,
+    @JsonKey(name: 'developer_details')
+    final Map<String, dynamic>? developerDetails,
+    @JsonKey(name: 'additional_fields')
+    final Map<String, dynamic>? additionalFields,
+  }) = _$AppPaymentModelImpl;
 
   factory _AppPaymentModel.fromJson(Map<String, dynamic> json) =
       _$AppPaymentModelImpl.fromJson;
