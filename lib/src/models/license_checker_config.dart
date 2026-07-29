@@ -10,7 +10,7 @@ sealed class LicenseCheckerConfig with _$LicenseCheckerConfig {
     required String appName,
     @Default(true) bool autoDecrementLaunchCount,
     @Default(true) bool showApiLogs,
-    @Default(0) num rulesVersion,
+    @Default(0) double rulesVersion,
     @Default('LICENSE_CHECKER_FLUTTER_LOG') String logTag,
   }) = _LicenseCheckerConfig;
 

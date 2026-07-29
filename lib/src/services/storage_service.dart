@@ -1,0 +1,120 @@
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../exception/license_checker_exception.dart';
+import '../models/license_checker_config.dart';
+
+class StorageService {
+  StorageService._();
+  static SharedPreferences? _preferences;
+
+  static Future<void> init(LicenseCheckerConfig config) async {
+    try {
+      _preferences = await SharedPreferences.getInstance();
+      _setConfig(config.rulesVersion, config.appName);
+    } catch (e) {
+      if (e is LicenseCheckerException) {
+        rethrow;
+      }
+      throw LicenseCheckerException(.initFailed);
+    }
+  }
+
+  static Future<void> _setConfig(double version, String appName) async {
+    final storedVersion = _version;
+    final storedAppName = _appName;
+
+    if ((version == storedVersion) && (appName == storedAppName)) {
+      return;
+    }
+
+    if (storedAppName != appName) {
+      await _clear();
+    }
+
+    if (storedAppName == null) {
+      await _clear();
+      await _setVersion(version);
+      await _setAppName(appName);
+      return;
+    }
+
+    if (version > storedVersion) {
+      await _clear();
+      await _setVersion(version);
+    }
+  }
+
+  static double get _version {
+    try {
+      return _preferences!.getDouble(_StorageServiceKeys.version) ?? 0;
+    } catch (e) {
+      throw LicenseCheckerException(.initFailed);
+    }
+  }
+
+  static String? get _appName {
+    try {
+      return _preferences!.getString(_StorageServiceKeys.appName);
+    } catch (e) {
+      throw LicenseCheckerException(.initFailed);
+    }
+  }
+
+  static Future<void> _setVersion(double version) async {
+    try {
+      await _preferences!.setDouble(_StorageServiceKeys.version, version);
+    } catch (e) {
+      throw LicenseCheckerException(.initFailed);
+    }
+  }
+
+  static Future<void> _setAppName(String appName) async {
+    try {
+      await _preferences!.setString(_StorageServiceKeys.appName, appName);
+    } catch (e) {
+      throw LicenseCheckerException(.initFailed);
+    }
+  }
+
+  static int get launchCount {
+    try {
+      return _preferences!.getInt(_StorageServiceKeys.launchCount) ?? 0;
+    } catch (e) {
+      throw LicenseCheckerException(.initFailed);
+    }
+  }
+
+  static Future<void> setLaunchCount(int count) async {
+    try {
+      final launchToBeSet = launchCount < 0
+          ? launchCount * -1 * 100
+          : launchCount;
+      await _preferences!.setInt(
+        _StorageServiceKeys.launchCount,
+        launchToBeSet,
+      );
+    } catch (e) {
+      throw LicenseCheckerException(.initFailed);
+    }
+  }
+
+  static Future<void> _clear() async {
+    try {
+      await _preferences!.clear();
+    } catch (e) {
+      throw LicenseCheckerException(.initFailed);
+    }
+  }
+}
+
+sealed class _StorageServiceKeys {
+  static String get _ref => 'LICENSE_CHECKER_FLUTTER_REF_';
+
+  static String get version => '${_ref}VERSION';
+
+  static String get paymentModel => '${_ref}PAYMENT_MODEL';
+
+  static String get launchCount => '${_ref}LAUNCH_COUNT';
+
+  static String get appName => '${_ref}APP_NAME';
+}

@@ -13,7 +13,7 @@ _LicenseCheckerConfig _$LicenseCheckerConfigFromJson(
   appName: json['appName'] as String,
   autoDecrementLaunchCount: json['autoDecrementLaunchCount'] as bool? ?? true,
   showApiLogs: json['showApiLogs'] as bool? ?? true,
-  rulesVersion: json['rulesVersion'] as num? ?? 0,
+  rulesVersion: (json['rulesVersion'] as num?)?.toDouble() ?? 0,
   logTag: json['logTag'] as String? ?? 'LICENSE_CHECKER_FLUTTER_LOG',
 );
 

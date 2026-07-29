@@ -21,7 +21,7 @@ class InitService {
     const rulesVersionSt = String.fromEnvironment(
       'LICENSE_CHECKER_RULES_VERSION',
     );
-    final rulesVersion = num.tryParse(rulesVersionSt) ?? 0;
+    final rulesVersion = double.tryParse(rulesVersionSt) ?? 0;
 
     return LicenseCheckerConfig(
       jsonURL: config?.jsonURL ?? jsonURL,

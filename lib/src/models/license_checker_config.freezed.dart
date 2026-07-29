@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$LicenseCheckerConfig {
 
- String get jsonURL; String get appName; bool get autoDecrementLaunchCount; bool get showApiLogs; num get rulesVersion; String get logTag;
+ String get jsonURL; String get appName; bool get autoDecrementLaunchCount; bool get showApiLogs; double get rulesVersion; String get logTag;
 /// Create a copy of LicenseCheckerConfig
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $LicenseCheckerConfigCopyWith<$Res>  {
   factory $LicenseCheckerConfigCopyWith(LicenseCheckerConfig value, $Res Function(LicenseCheckerConfig) _then) = _$LicenseCheckerConfigCopyWithImpl;
 @useResult
 $Res call({
- String jsonURL, String appName, bool autoDecrementLaunchCount, bool showApiLogs, num rulesVersion, String logTag
+ String jsonURL, String appName, bool autoDecrementLaunchCount, bool showApiLogs, double rulesVersion, String logTag
 });
 
 
@@ -72,7 +72,7 @@ as String,appName: null == appName ? _self.appName : appName // ignore: cast_nul
 as String,autoDecrementLaunchCount: null == autoDecrementLaunchCount ? _self.autoDecrementLaunchCount : autoDecrementLaunchCount // ignore: cast_nullable_to_non_nullable
 as bool,showApiLogs: null == showApiLogs ? _self.showApiLogs : showApiLogs // ignore: cast_nullable_to_non_nullable
 as bool,rulesVersion: null == rulesVersion ? _self.rulesVersion : rulesVersion // ignore: cast_nullable_to_non_nullable
-as num,logTag: null == logTag ? _self.logTag : logTag // ignore: cast_nullable_to_non_nullable
+as double,logTag: null == logTag ? _self.logTag : logTag // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
@@ -155,7 +155,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String jsonURL,  String appName,  bool autoDecrementLaunchCount,  bool showApiLogs,  num rulesVersion,  String logTag)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function( String jsonURL,  String appName,  bool autoDecrementLaunchCount,  bool showApiLogs,  double rulesVersion,  String logTag)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LicenseCheckerConfig() when $default != null:
 return $default(_that.jsonURL,_that.appName,_that.autoDecrementLaunchCount,_that.showApiLogs,_that.rulesVersion,_that.logTag);case _:
@@ -176,7 +176,7 @@ return $default(_that.jsonURL,_that.appName,_that.autoDecrementLaunchCount,_that
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String jsonURL,  String appName,  bool autoDecrementLaunchCount,  bool showApiLogs,  num rulesVersion,  String logTag)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function( String jsonURL,  String appName,  bool autoDecrementLaunchCount,  bool showApiLogs,  double rulesVersion,  String logTag)  $default,) {final _that = this;
 switch (_that) {
 case _LicenseCheckerConfig():
 return $default(_that.jsonURL,_that.appName,_that.autoDecrementLaunchCount,_that.showApiLogs,_that.rulesVersion,_that.logTag);}
@@ -193,7 +193,7 @@ return $default(_that.jsonURL,_that.appName,_that.autoDecrementLaunchCount,_that
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String jsonURL,  String appName,  bool autoDecrementLaunchCount,  bool showApiLogs,  num rulesVersion,  String logTag)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function( String jsonURL,  String appName,  bool autoDecrementLaunchCount,  bool showApiLogs,  double rulesVersion,  String logTag)?  $default,) {final _that = this;
 switch (_that) {
 case _LicenseCheckerConfig() when $default != null:
 return $default(_that.jsonURL,_that.appName,_that.autoDecrementLaunchCount,_that.showApiLogs,_that.rulesVersion,_that.logTag);case _:
@@ -215,7 +215,7 @@ class _LicenseCheckerConfig implements LicenseCheckerConfig {
 @override final  String appName;
 @override@JsonKey() final  bool autoDecrementLaunchCount;
 @override@JsonKey() final  bool showApiLogs;
-@override@JsonKey() final  num rulesVersion;
+@override@JsonKey() final  double rulesVersion;
 @override@JsonKey() final  String logTag;
 
 /// Create a copy of LicenseCheckerConfig
@@ -251,7 +251,7 @@ abstract mixin class _$LicenseCheckerConfigCopyWith<$Res> implements $LicenseChe
   factory _$LicenseCheckerConfigCopyWith(_LicenseCheckerConfig value, $Res Function(_LicenseCheckerConfig) _then) = __$LicenseCheckerConfigCopyWithImpl;
 @override @useResult
 $Res call({
- String jsonURL, String appName, bool autoDecrementLaunchCount, bool showApiLogs, num rulesVersion, String logTag
+ String jsonURL, String appName, bool autoDecrementLaunchCount, bool showApiLogs, double rulesVersion, String logTag
 });
 
 
@@ -275,7 +275,7 @@ as String,appName: null == appName ? _self.appName : appName // ignore: cast_nul
 as String,autoDecrementLaunchCount: null == autoDecrementLaunchCount ? _self.autoDecrementLaunchCount : autoDecrementLaunchCount // ignore: cast_nullable_to_non_nullable
 as bool,showApiLogs: null == showApiLogs ? _self.showApiLogs : showApiLogs // ignore: cast_nullable_to_non_nullable
 as bool,rulesVersion: null == rulesVersion ? _self.rulesVersion : rulesVersion // ignore: cast_nullable_to_non_nullable
-as num,logTag: null == logTag ? _self.logTag : logTag // ignore: cast_nullable_to_non_nullable
+as double,logTag: null == logTag ? _self.logTag : logTag // ignore: cast_nullable_to_non_nullable
 as String,
   ));
 }
