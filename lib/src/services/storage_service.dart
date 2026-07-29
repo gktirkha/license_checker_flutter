@@ -15,7 +15,7 @@ class StorageService {
   static Future<void> init(LicenseCheckerConfig config) async {
     try {
       _preferences = await SharedPreferences.getInstance();
-      _setConfig(config.rulesVersion, config.appName);
+      await _setConfig(config.rulesVersion, config.appName);
     } catch (e, s) {
       if (e is LicenseCheckerFlutterException) {
         rethrow;

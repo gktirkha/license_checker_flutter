@@ -61,7 +61,12 @@ class LicenseCheckerFlutterHelper {
     required String jsonUrl,
     required String appName,
     required bool showApiLogs,
+    LicenseCheckerApiResponseModel? mockApiResponse,
   }) async {
+    if (mockApiResponse != null) {
+      return mockApiResponse.apps?[appName];
+    }
+
     try {
       final Dio dioClient = Dio(
         BaseOptions(

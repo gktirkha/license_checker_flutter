@@ -12,9 +12,18 @@ class LicenseCheckerFlutter {
   static LicenseCheckerConfig? _config;
   static String _logTag = 'LICENSE_CHECKER_FLUTTER_LOG';
   static String get logTag => _logTag;
+  static LicenseCheckerApiResponseModel? _mockApiResponse;
 
-  static Future<void> init(LicenseCheckerConfig? config) async {
+  /// Initializes [LicenseCheckerFlutter] with the given [config].
+  ///
+  /// [mockApiResponse] is intended for testing: when provided, [checkStatus]
+  /// uses it in place of the remote JSON and never makes a network call.
+  static Future<void> init(
+    LicenseCheckerConfig? config, {
+    LicenseCheckerApiResponseModel? mockApiResponse,
+  }) async {
     try {
+      _mockApiResponse = mockApiResponse;
       _config = InitService.init(config);
       if (_config == null) {
         throw LicenseCheckerFlutterException(
@@ -76,6 +85,7 @@ class LicenseCheckerFlutter {
               jsonUrl: config.jsonURL,
               appName: config.appName,
               showApiLogs: config.showApiLogs,
+              mockApiResponse: _mockApiResponse,
             )
           : storedModel;
 
