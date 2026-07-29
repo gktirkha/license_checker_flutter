@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../exception/license_checker_exception.dart';
 import '../logger/license_checker_logger.dart';
+import '../models/license_checker_api_response_model/license_checker_api_response_model.dart';
 import '../models/license_checker_config/license_checker_config.dart';
 
 class StorageService {
@@ -107,6 +110,33 @@ class StorageService {
   static Future<void> clearLaunchCount() async {
     try {
       await _preferences!.setInt(_StorageServiceKeys.launchCount, 0);
+    } catch (e) {
+      licenseCheckerLogger(e);
+      throw LicenseCheckerException(.initFailed);
+    }
+  }
+
+  static LicenseCheckerPaymentModel? get paymentModel {
+    try {
+      final raw = _preferences!.getString(_StorageServiceKeys.paymentModel);
+      if (raw == null) {
+        return null;
+      }
+      return LicenseCheckerPaymentModel.fromJson(
+        jsonDecode(raw) as Map<String, dynamic>,
+      );
+    } catch (e) {
+      licenseCheckerLogger(e);
+      throw LicenseCheckerException(.initFailed);
+    }
+  }
+
+  static Future<void> setPaymentModel(LicenseCheckerPaymentModel model) async {
+    try {
+      await _preferences!.setString(
+        _StorageServiceKeys.paymentModel,
+        jsonEncode(model.toJson()),
+      );
     } catch (e) {
       licenseCheckerLogger(e);
       throw LicenseCheckerException(.initFailed);
