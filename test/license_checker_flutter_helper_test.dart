@@ -59,7 +59,6 @@ void main() {
           LicenseCheckerPaymentModel(
             status: PaymentStatus.PAID,
             targetVersion: 1,
-            shouldCheckAfterPaid: false,
           ),
         );
         expect(
@@ -205,10 +204,7 @@ void main() {
 
     test('UNKNOWN status always re-checks online', () async {
       await StorageService.setPaymentModel(
-        LicenseCheckerPaymentModel(
-          status: PaymentStatus.UNKNOWN,
-          targetVersion: 1,
-        ),
+        LicenseCheckerPaymentModel(targetVersion: 1),
       );
       expect(
         await LicenseCheckerFlutterHelper.shouldCheckOnline(config),

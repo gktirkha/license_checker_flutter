@@ -190,7 +190,6 @@ void main() {
                 status: PaymentStatus.ALLOW_LIMITED_LAUNCHES,
                 targetVersion: 1,
                 maxLaunch: 1,
-                strictMaxLaunch: true,
               ),
             },
           );
