@@ -1,0 +1,23 @@
+library;
+
+enum OnUnhandledReason {
+  PAID,
+
+  UNPAID,
+
+  APP_NOT_FOUND_IN_JSON,
+
+  LIMITED_LAUNCH,
+
+  LIMITED_LAUNCH_EXCEEDED,
+
+  TRIAL_WARNING,
+
+  TRIAL_ENDED,
+
+  TRIAL,
+
+  EXCEPTION,
+
+  TARGET_VERSION_MISMATCH,
+}
