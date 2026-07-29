@@ -42,10 +42,12 @@ class LicenseCheckerFlutterHelper {
         final now = DateTime.now();
         final warningDate = cachedPaymentModel.warningDate;
         final expiryDate = cachedPaymentModel.expireDateTime;
-        if (expiryDate == null || warningDate == null) {
+        if (expiryDate == null) {
           return true;
         }
-        return (now.isAfter(warningDate) && now.isBefore(expiryDate)) ||
+        return (warningDate != null &&
+                now.isAfter(warningDate) &&
+                now.isBefore(expiryDate)) ||
             now.isAfter(expiryDate);
 
       case .UNKNOWN:

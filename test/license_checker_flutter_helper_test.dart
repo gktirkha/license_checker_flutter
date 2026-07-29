@@ -185,21 +185,33 @@ void main() {
         );
       });
 
-      test(
-        're-checks online when expire_date or warning_date is missing',
-        () async {
-          await StorageService.setPaymentModel(
-            LicenseCheckerPaymentModel(
-              status: PaymentStatus.ON_TRIAL,
-              targetVersion: 1,
-            ),
-          );
-          expect(
-            await LicenseCheckerFlutterHelper.shouldCheckOnline(config),
-            isTrue,
-          );
-        },
-      );
+      test('re-checks online when expire_date is missing', () async {
+        await StorageService.setPaymentModel(
+          LicenseCheckerPaymentModel(
+            status: PaymentStatus.ON_TRIAL,
+            targetVersion: 1,
+          ),
+        );
+        expect(
+          await LicenseCheckerFlutterHelper.shouldCheckOnline(config),
+          isTrue,
+        );
+      });
+
+      test('trusts the cache when warning_date is not set and the trial is '
+          'still active (warning_date is optional per the docs)', () async {
+        await StorageService.setPaymentModel(
+          LicenseCheckerPaymentModel(
+            status: PaymentStatus.ON_TRIAL,
+            targetVersion: 1,
+            expireDateTime: DateTime.now().add(const Duration(days: 30)),
+          ),
+        );
+        expect(
+          await LicenseCheckerFlutterHelper.shouldCheckOnline(config),
+          isFalse,
+        );
+      });
     });
 
     test('UNKNOWN status always re-checks online', () async {
