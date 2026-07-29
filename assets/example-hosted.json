@@ -26,7 +26,7 @@
     "limited_launches_no_strict_max_launch": {
       "target_version": 1,
       "status": "ALLOW_LIMITED_LAUNCHES",
-      "max_launch": -1,
+      "max_launch": 10,
       "strict_max_launch": false
     },
     "trial": {
