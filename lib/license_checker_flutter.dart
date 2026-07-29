@@ -1,12 +1,5 @@
-/// A Dart library for the License Checking Flutter application.
-///
-/// This library provides functionality for managing payment statuses,
-/// handling exceptions, and working with application configuration.
-library;
-
-export './src/exception/license_checker_flutter_exception.dart';
-export './src/model/payment_status_model.dart';
-export 'src/constants/license_checker_flutter_type_definitions.dart';
-export 'src/constants/on_unhandled_reason.dart';
-export 'src/constants/payment_status.dart';
-export 'src/license_checker_flutter.dart';
+/// A Calculator.
+class Calculator {
+  /// Returns [value] plus 1.
+  int addOne(int value) => value + 1;
+}
