@@ -110,11 +110,7 @@ void main() {
     test('routes UNKNOWN status through onException', () async {
       await initWith(
         LicenseCheckerApiResponseModel(
-          apps: {
-            _appName: LicenseCheckerPaymentModel(
-              targetVersion: 1,
-            ),
-          },
+          apps: {_appName: LicenseCheckerPaymentModel(targetVersion: 1)},
         ),
       );
 
@@ -184,6 +180,97 @@ void main() {
 
         expect(exceeded, isTrue);
       });
+
+      test(
+        'stays exceeded across further checks when strict_max_launch is true',
+        () async {
+          final mockResponse = LicenseCheckerApiResponseModel(
+            apps: {
+              _appName: LicenseCheckerPaymentModel(
+                status: PaymentStatus.ALLOW_LIMITED_LAUNCHES,
+                targetVersion: 1,
+                maxLaunch: 1,
+                strictMaxLaunch: true,
+              ),
+            },
+          );
+          await initWith(mockResponse);
+
+          await LicenseCheckerFlutter.checkStatus(
+            onException: (e) => fail('unexpected exception: $e'),
+            onUnhandled: (reason, model) =>
+                fail('unexpected unhandled: $reason'),
+            onLimitedLaunch: (model, currentCount) {},
+          );
+
+          for (var i = 0; i < 2; i++) {
+            var exceeded = false;
+            await LicenseCheckerFlutter.checkStatus(
+              onException: (e) => fail('unexpected exception: $e'),
+              onUnhandled: (reason, model) =>
+                  fail('unexpected unhandled: $reason'),
+              onLimitedLaunchExceeded: (model) => exceeded = true,
+              onLimitedLaunch: (model, currentCount) =>
+                  fail('should stay exceeded, got count $currentCount'),
+            );
+            expect(exceeded, isTrue, reason: 'check #$i should stay exceeded');
+          }
+        },
+      );
+
+      test('refills the count on every online check when strict_max_launch '
+          'is false', () async {
+        final mockResponse = LicenseCheckerApiResponseModel(
+          apps: {
+            _appName: LicenseCheckerPaymentModel(
+              status: PaymentStatus.ALLOW_LIMITED_LAUNCHES,
+              targetVersion: 1,
+              maxLaunch: 1,
+              strictMaxLaunch: false,
+            ),
+          },
+        );
+        await initWith(mockResponse);
+
+        // First check grants 1 launch, then auto-decrements it to 0.
+        await LicenseCheckerFlutter.checkStatus(
+          onException: (e) => fail('unexpected exception: $e'),
+          onUnhandled: (reason, model) => fail('unexpected unhandled: $reason'),
+          onLimitedLaunch: (model, currentCount) {},
+        );
+
+        // Second check: count is 0, so it goes online again. Since
+        // strict_max_launch is false, the count is refilled instead of
+        // staying exhausted.
+        int? refilled;
+        await LicenseCheckerFlutter.checkStatus(
+          onException: (e) => fail('unexpected exception: $e'),
+          onUnhandled: (reason, model) => fail('unexpected unhandled: $reason'),
+          onLimitedLaunch: (model, currentCount) => refilled = currentCount,
+          onLimitedLaunchExceeded: (model) => fail('should have been refilled'),
+        );
+
+        expect(refilled, 1);
+      });
+    });
+
+    test('throws a config exception when target_version is not set', () async {
+      await initWith(
+        LicenseCheckerApiResponseModel(
+          apps: {
+            _appName: LicenseCheckerPaymentModel(status: PaymentStatus.PAID),
+          },
+        ),
+      );
+
+      LicenseCheckerFlutterException? captured;
+      await LicenseCheckerFlutter.checkStatus(
+        onException: (e) => captured = e,
+        onUnhandled: (reason, model) => fail('unexpected unhandled: $reason'),
+      );
+
+      expect(captured, isNotNull);
+      expect(captured!.type, LicenseCheckerExceptionType.configException);
     });
 
     group('ON_TRIAL', () {
