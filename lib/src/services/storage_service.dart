@@ -104,9 +104,23 @@ class StorageService {
     }
   }
 
+  static Future<void> clearLaunchCount() async {
+    try {
+      await _preferences!.setInt(_StorageServiceKeys.launchCount, 0);
+    } catch (e) {
+      licenseCheckerLogger(e);
+      throw LicenseCheckerException(.initFailed);
+    }
+  }
+
   static Future<void> _clear() async {
     try {
-      await _preferences!.clear();
+      final keys = _preferences!.getKeys().where(
+        (key) => key.startsWith(_StorageServiceKeys._ref),
+      );
+      for (final key in keys) {
+        await _preferences!.remove(key);
+      }
     } catch (e) {
       licenseCheckerLogger(e);
       throw LicenseCheckerException(.initFailed);
