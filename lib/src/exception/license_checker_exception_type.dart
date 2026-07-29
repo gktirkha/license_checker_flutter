@@ -4,4 +4,5 @@ enum LicenseCheckerExceptionType {
   unknown,
   unknownPaymentStatus,
   configException,
+  valueNotFound,
 }

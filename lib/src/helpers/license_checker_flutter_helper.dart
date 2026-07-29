@@ -32,7 +32,8 @@ class LicenseCheckerFlutterHelper {
         return true;
 
       case .ALLOW_LIMITED_LAUNCHES:
-        return (StorageService.allowedLaunchCount <= 0);
+        final currentCount = StorageService.allowedLaunchCount;
+        return (currentCount == null || currentCount <= 0);
 
       case .ON_TRIAL:
         if (cachedPaymentModel.checkDuringTrial == true) {
@@ -167,14 +168,14 @@ class LicenseCheckerFlutterHelper {
           }
 
           if (isOnlineModel) {
-            if (!operationModel.strictMaxLaunch) {
-              StorageService.setAllowedLaunchCount(allowedLaunches);
+            if (!operationModel.strictMaxLaunch || currentLaunchCount == null) {
+              await StorageService.setAllowedLaunchCount(allowedLaunches);
             }
           }
 
           currentLaunchCount = StorageService.allowedLaunchCount;
 
-          if (currentLaunchCount <= 0) {
+          if (currentLaunchCount == null || currentLaunchCount <= 0) {
             if (onLimitedLaunchExceeded != null) {
               onLimitedLaunchExceeded(operationModel);
             } else {

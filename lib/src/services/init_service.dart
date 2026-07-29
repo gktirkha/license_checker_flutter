@@ -1,3 +1,5 @@
+import '../constants/license_checker_error_messages.dart';
+import '../exception/license_checker_flutter_exception.dart';
 import '../models/license_checker_config/license_checker_config.dart';
 
 class InitService {
@@ -11,25 +13,48 @@ class InitService {
       defaultValue: 'LICENSE_CHECKER_FLUTTER_LOG',
     );
     const autoDecrementLaunchCount = bool.fromEnvironment(
-      'LICENSE_CHECKER_AUTO_DECREMENT_LAUNCH_COUNT',
+      'LICENSE_CHECKER_AUTO_DECREMENT',
       defaultValue: true,
     );
     const showApiLogs = bool.fromEnvironment(
       'LICENSE_CHECKER_SHOW_API_LOGS',
       defaultValue: true,
     );
-    const rulesVersionSt = String.fromEnvironment(
-      'LICENSE_CHECKER_RULES_VERSION',
-    );
+    const rulesVersionSt = String.fromEnvironment('LICENSE_CHECKER_VERSION');
     final rulesVersion = double.tryParse(rulesVersionSt) ?? 0;
 
+    final resolvedJsonURL = config?.jsonURL ?? jsonURL;
+    final resolvedAppName = config?.appName ?? appName;
+    final resolvedRulesVersion = config?.rulesVersion ?? rulesVersion;
+
+    if (resolvedJsonURL.isEmpty) {
+      throw LicenseCheckerFlutterException(
+        .valueNotFound,
+        message: LicenseCheckerErrorMessages.missingJsonUrl,
+      );
+    }
+
+    if (resolvedAppName.isEmpty) {
+      throw LicenseCheckerFlutterException(
+        .valueNotFound,
+        message: LicenseCheckerErrorMessages.missingAppName,
+      );
+    }
+
+    if (resolvedRulesVersion <= 0) {
+      throw LicenseCheckerFlutterException(
+        .valueNotFound,
+        message: LicenseCheckerErrorMessages.missingOrInvalidRulesVersion,
+      );
+    }
+
     return LicenseCheckerConfig(
-      jsonURL: config?.jsonURL ?? jsonURL,
-      appName: config?.appName ?? appName,
+      jsonURL: resolvedJsonURL,
+      appName: resolvedAppName,
       logTag: config?.logTag ?? logTag,
       autoDecrementLaunchCount:
           config?.autoDecrementLaunchCount ?? autoDecrementLaunchCount,
-      rulesVersion: config?.rulesVersion ?? rulesVersion,
+      rulesVersion: resolvedRulesVersion,
       showApiLogs: config?.showApiLogs ?? showApiLogs,
     );
   }

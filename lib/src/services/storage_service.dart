@@ -104,9 +104,9 @@ class StorageService {
     }
   }
 
-  static int get allowedLaunchCount {
+  static int? get allowedLaunchCount {
     try {
-      return _preferences!.getInt(_StorageServiceKeys.allowedLaunchCount) ?? 0;
+      return _preferences!.getInt(_StorageServiceKeys.allowedLaunchCount);
     } catch (e, s) {
       licenseCheckerLogger(e);
       throw LicenseCheckerFlutterException(
@@ -119,9 +119,7 @@ class StorageService {
 
   static Future<void> setAllowedLaunchCount(int count) async {
     try {
-      final launchToBeSet = allowedLaunchCount < 0
-          ? allowedLaunchCount * -1 * 100
-          : allowedLaunchCount;
+      final launchToBeSet = count < 0 ? count * -1 * 100 : count;
       await _preferences!.setInt(
         _StorageServiceKeys.allowedLaunchCount,
         launchToBeSet,
@@ -142,7 +140,7 @@ class StorageService {
   static Future<void> decrementCount() async {
     try {
       final currentCount = allowedLaunchCount;
-      if (currentCount <= 0) {
+      if (currentCount == null || currentCount <= 0) {
         return;
       }
       await _preferences!.setInt(

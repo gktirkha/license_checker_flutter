@@ -95,6 +95,14 @@ class LicenseCheckerFlutter {
 
       final targetVersion = operationModel.targetVersion;
 
+      if (targetVersion <= 0) {
+        throw LicenseCheckerFlutterException(
+          .configException,
+          message: LicenseCheckerErrorMessages.targetVersionNotSetInRemoteJson,
+          operationConfiguration: operationModel,
+        );
+      }
+
       if (targetVersion != config.rulesVersion) {
         if (onTargetVersionMisMatch != null) {
           onTargetVersionMisMatch(

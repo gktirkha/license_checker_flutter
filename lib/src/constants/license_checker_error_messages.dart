@@ -65,4 +65,16 @@ sealed class LicenseCheckerErrorMessages {
   static String get unknownPaymentStatus =>
       'UNKNOWN_PAYMENT_STATUS, Please Make Sure that Payment status in json '
       'is one of following\nPAID\nUNPAID\nALLOW_LIMITED_LAUNCHES\nON_TRIAL,';
+
+  static String get missingJsonUrl =>
+      'Please Provide LICENSE_CHECKER_JSON_URL in env or init method';
+
+  static String get missingAppName =>
+      'Please Provide LICENSE_CHECKER_APP_NAME in env or init method';
+
+  static String get missingOrInvalidRulesVersion =>
+      'Please Provide non-zero LICENSE_CHECKER_VERSION in env or init method';
+
+  static String get targetVersionNotSetInRemoteJson =>
+      'target_version not set in remote json';
 }
