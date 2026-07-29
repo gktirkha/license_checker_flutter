@@ -83,22 +83,23 @@ class StorageService {
     }
   }
 
-  static int get launchCount {
+  static int get allowedLaunchCount {
     try {
-      return _preferences!.getInt(_StorageServiceKeys.launchCount) ?? 0;
+      return _preferences!.getInt(_StorageServiceKeys.allowedLaunchCount) ??
+          0;
     } catch (e) {
       licenseCheckerLogger(e);
       throw LicenseCheckerException(.initFailed);
     }
   }
 
-  static Future<void> setLaunchCount(int count) async {
+  static Future<void> setAllowedLaunchCount(int count) async {
     try {
-      final launchToBeSet = launchCount < 0
-          ? launchCount * -1 * 100
-          : launchCount;
+      final launchToBeSet = allowedLaunchCount < 0
+          ? allowedLaunchCount * -1 * 100
+          : allowedLaunchCount;
       await _preferences!.setInt(
-        _StorageServiceKeys.launchCount,
+        _StorageServiceKeys.allowedLaunchCount,
         launchToBeSet,
       );
     } catch (e) {
@@ -107,9 +108,9 @@ class StorageService {
     }
   }
 
-  static Future<void> clearLaunchCount() async {
+  static Future<void> clearAllowedLaunchCount() async {
     try {
-      await _preferences!.setInt(_StorageServiceKeys.launchCount, 0);
+      await _preferences!.setInt(_StorageServiceKeys.allowedLaunchCount, 0);
     } catch (e) {
       licenseCheckerLogger(e);
       throw LicenseCheckerException(.initFailed);
@@ -165,7 +166,7 @@ sealed class _StorageServiceKeys {
 
   static String get paymentModel => '${_ref}PAYMENT_MODEL';
 
-  static String get launchCount => '${_ref}LAUNCH_COUNT';
+  static String get allowedLaunchCount => '${_ref}ALLOWED_LAUNCH_COUNT';
 
   static String get appName => '${_ref}APP_NAME';
 }
