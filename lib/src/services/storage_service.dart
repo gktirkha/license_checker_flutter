@@ -136,6 +136,29 @@ class StorageService {
     }
   }
 
+  /// Decrements the launch count in SharedPreferences by one.
+  ///
+  /// This method will not decrement if the current count is null or less than or equal to zero.
+  static Future<void> decrementCount() async {
+    try {
+      final currentCount = allowedLaunchCount;
+      if (currentCount <= 0) {
+        return;
+      }
+      await _preferences!.setInt(
+        _StorageServiceKeys.allowedLaunchCount,
+        currentCount - 1,
+      );
+    } catch (e, s) {
+      licenseCheckerLogger(e);
+      throw LicenseCheckerException(
+        .initFailed,
+        message: LicenseCheckerErrorMessages.clearAllowedLaunchCountFailed,
+        stackTrace: s,
+      );
+    }
+  }
+
   static Future<void> clearAllowedLaunchCount() async {
     try {
       await _preferences!.setInt(_StorageServiceKeys.allowedLaunchCount, 0);

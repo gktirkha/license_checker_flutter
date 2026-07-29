@@ -2,11 +2,13 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 
+import '../constants/license_checker_error_messages.dart';
 import '../exception/license_checker_exception.dart';
 import '../logger/license_checker_logger.dart';
 import '../models/license_checker_api_response_model/license_checker_api_response_model.dart';
 import '../models/license_checker_config/license_checker_config.dart';
 import '../services/storage_service.dart';
+import '../typedefs/typedefs.dart';
 
 class LicenseCheckerFlutterHelper {
   LicenseCheckerFlutterHelper._();
@@ -90,15 +92,18 @@ class LicenseCheckerFlutterHelper {
     } catch (e) {
       if (e is DioException) {
         final String message = switch (e.type) {
-          .connectionTimeout => 'CONNECTION TIME_OUT',
-          .sendTimeout => 'SEND TIME_OUT',
-          .receiveTimeout => 'RECEIVE TIME_OUT',
-          .badCertificate => 'BAD_CERTIFICATE',
-          .badResponse => 'BAD_RESPONSE',
-          .cancel => 'CANCEL',
-          .connectionError => 'CONNECTION_ERROR',
-          .unknown => 'UNKNOWN',
-          .transformTimeout => 'TIMEOUT',
+          .connectionTimeout =>
+            LicenseCheckerErrorMessages.networkConnectionTimeout,
+          .sendTimeout => LicenseCheckerErrorMessages.networkSendTimeout,
+          .receiveTimeout => LicenseCheckerErrorMessages.networkReceiveTimeout,
+          .badCertificate => LicenseCheckerErrorMessages.networkBadCertificate,
+          .badResponse => LicenseCheckerErrorMessages.networkBadResponse,
+          .cancel => LicenseCheckerErrorMessages.networkCancel,
+          .connectionError =>
+            LicenseCheckerErrorMessages.networkConnectionError,
+          .unknown => LicenseCheckerErrorMessages.networkUnknown,
+          .transformTimeout =>
+            LicenseCheckerErrorMessages.networkTransformTimeout,
         };
 
         throw LicenseCheckerException(
@@ -111,6 +116,139 @@ class LicenseCheckerFlutterHelper {
       } else {
         rethrow;
       }
+    }
+  }
+
+  static Future<void> handleExecution({
+    required OnException onException,
+    required OnUnhandled onUnhandled,
+    OnAppNotFound? onAppNotFound,
+    OnPaid? onPaid,
+    OnUnPaid? onUnPaid,
+    OnLimitedLaunch? onLimitedLaunch,
+    OnLimitedLaunchExceeded? onLimitedLaunchExceeded,
+    OnTrial? onTrial,
+    OnTrialWarning? onTrialWarning,
+    OnTrialEnded? onTrialEnded,
+    OnTargetVersionMisMatch? onTargetVersionMisMatch,
+    required LicenseCheckerPaymentModel operationModel,
+    required bool isOnlineModel,
+    required bool autoDecrementLaunchCount,
+  }) async {
+    try {
+      switch (operationModel.status) {
+        case .PAID:
+          if (onPaid != null) {
+            onPaid(operationModel);
+          } else {
+            onUnhandled(.PAID, operationModel);
+          }
+          break;
+
+        case .UNPAID:
+          if (onUnPaid != null) {
+            onUnPaid(operationModel);
+          } else {
+            onUnhandled(.UNPAID, operationModel);
+          }
+          break;
+
+        case .ALLOW_LIMITED_LAUNCHES:
+          final allowedLaunches = operationModel.maxLaunch;
+          int? currentLaunchCount = StorageService.allowedLaunchCount;
+
+          if (allowedLaunches == null) {
+            throw LicenseCheckerException(
+              .configException,
+              message:
+                  LicenseCheckerErrorMessages.maxLaunchNotSetForLimitedLaunches,
+              operationConfiguration: operationModel,
+            );
+          }
+
+          if (isOnlineModel) {
+            if (!operationModel.strictMaxLaunch) {
+              StorageService.setAllowedLaunchCount(allowedLaunches);
+            }
+          }
+
+          currentLaunchCount = StorageService.allowedLaunchCount;
+
+          if (currentLaunchCount <= 0) {
+            if (onLimitedLaunchExceeded != null) {
+              onLimitedLaunchExceeded(operationModel);
+            } else {
+              onUnhandled(.LIMITED_LAUNCH_EXCEEDED, operationModel);
+            }
+          } else {
+            if (onLimitedLaunch != null) {
+              onLimitedLaunch(operationModel, currentLaunchCount);
+            } else {
+              onUnhandled(.LIMITED_LAUNCH, operationModel);
+            }
+          }
+          if (autoDecrementLaunchCount) await StorageService.decrementCount();
+
+          break;
+
+        case .ON_TRIAL:
+          final now = DateTime.now();
+          final warningDate = operationModel.warningDate;
+          final expiryDate = operationModel.expireDateTime;
+          if (expiryDate == null) {
+            throw LicenseCheckerException(
+              .configException,
+              message: LicenseCheckerErrorMessages.expireDateNotSetForTrial,
+            );
+          }
+          if (warningDate != null &&
+              now.isAfter(warningDate) &&
+              now.isBefore(expiryDate)) {
+            if (onTrialWarning != null) {
+              onTrialWarning(operationModel, expiryDate, warningDate);
+            } else {
+              onUnhandled(.TRIAL_WARNING, operationModel);
+            }
+          } else if (now.isAfter(expiryDate)) {
+            if (onTrialEnded != null) {
+              onTrialEnded(operationModel, expiryDate);
+            } else {
+              onUnhandled(.TRIAL_ENDED, operationModel);
+            }
+          } else if (now.isBefore(expiryDate)) {
+            if (onTrial != null) {
+              onTrial(operationModel, expiryDate, warningDate);
+            } else {
+              onUnhandled(.TRIAL, operationModel);
+            }
+          }
+          break;
+
+        case .UNKNOWN:
+          throw LicenseCheckerException(
+            .unknownPaymentStatus,
+            message: LicenseCheckerErrorMessages.unknownPaymentStatus,
+            operationConfiguration: operationModel,
+          );
+      }
+    } catch (e, s) {
+      licenseCheckerLogger(e);
+      onException(_convertException(e, s));
+    }
+  }
+
+  static LicenseCheckerException _convertException(
+    dynamic exception,
+    StackTrace stackTrace,
+  ) {
+    if (exception is LicenseCheckerException) {
+      return exception;
+    } else {
+      return .new(
+        .unknown,
+        message: exception.toString(),
+        stackTrace: stackTrace,
+      );
     }
   }
 }

@@ -1,1 +1,7 @@
-enum LicenseCheckerExceptionType { initFailed, networkException }
+enum LicenseCheckerExceptionType {
+  initFailed,
+  networkException,
+  unknown,
+  unknownPaymentStatus,
+  configException,
+}
