@@ -25,7 +25,7 @@ sealed class LicenseCheckerPaymentModel with _$LicenseCheckerPaymentModel {
     @JsonKey(name: 'status', unknownEnumValue: PaymentStatus.UNKNOWN)
     PaymentStatus status,
 
-    @Default(0) @JsonKey(name: 'target_version') double targetVersion,
+    @JsonKey(name: 'target_version') double? targetVersion,
 
     @Default(false)
     @JsonKey(name: 'should_check_after_paid')

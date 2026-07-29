@@ -26,3 +26,5 @@ Dependencies Update
 Update Readme
 ## 1.0.6
 Update dependencies (dio, json_annotation, shared_preferences, build_runner, json_serializable), bump SDK to ^3.12.2, add DioExceptionType.transformTimeout handling, and apply dart format updates
+## 1.0.7
+Fix: make `targetVersion` nullable so a missing `target_version` in the remote JSON is correctly detected as not set, instead of being conflated with an explicit `0`

@@ -32,7 +32,7 @@ _AppPaymentModel _$AppPaymentModelFromJson(Map<String, dynamic> json) =>
             unknownValue: PaymentStatus.UNKNOWN,
           ) ??
           PaymentStatus.UNKNOWN,
-      targetVersion: (json['target_version'] as num?)?.toDouble() ?? 0,
+      targetVersion: (json['target_version'] as num?)?.toDouble(),
       shouldCheckAfterPaid: json['should_check_after_paid'] as bool? ?? false,
       checkDuringTrial: json['check_during_trial'] as bool? ?? false,
       expireDateTime: json['expire_date'] == null

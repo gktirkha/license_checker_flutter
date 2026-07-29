@@ -287,7 +287,7 @@ LicenseCheckerPaymentModel _$LicenseCheckerPaymentModelFromJson(
 /// @nodoc
 mixin _$LicenseCheckerPaymentModel {
 
-@JsonKey(name: 'status', unknownEnumValue: PaymentStatus.UNKNOWN) PaymentStatus get status;@JsonKey(name: 'target_version') double get targetVersion;@JsonKey(name: 'should_check_after_paid') bool get shouldCheckAfterPaid;@JsonKey(name: 'check_during_trial') bool get checkDuringTrial;@JsonKey(name: 'expire_date') DateTime? get expireDateTime;@JsonKey(name: 'warning_date') DateTime? get warningDate;@JsonKey(name: 'strict_max_launch') bool get strictMaxLaunch;@JsonKey(name: 'max_launch') int? get maxLaunch;@JsonKey(name: 'developer_details') Map<String, dynamic> get developerDetails;@JsonKey(name: 'additional_fields') Map<String, dynamic> get additionalFields;
+@JsonKey(name: 'status', unknownEnumValue: PaymentStatus.UNKNOWN) PaymentStatus get status;@JsonKey(name: 'target_version') double? get targetVersion;@JsonKey(name: 'should_check_after_paid') bool get shouldCheckAfterPaid;@JsonKey(name: 'check_during_trial') bool get checkDuringTrial;@JsonKey(name: 'expire_date') DateTime? get expireDateTime;@JsonKey(name: 'warning_date') DateTime? get warningDate;@JsonKey(name: 'strict_max_launch') bool get strictMaxLaunch;@JsonKey(name: 'max_launch') int? get maxLaunch;@JsonKey(name: 'developer_details') Map<String, dynamic> get developerDetails;@JsonKey(name: 'additional_fields') Map<String, dynamic> get additionalFields;
 /// Create a copy of LicenseCheckerPaymentModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -320,7 +320,7 @@ abstract mixin class $LicenseCheckerPaymentModelCopyWith<$Res>  {
   factory $LicenseCheckerPaymentModelCopyWith(LicenseCheckerPaymentModel value, $Res Function(LicenseCheckerPaymentModel) _then) = _$LicenseCheckerPaymentModelCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'status', unknownEnumValue: PaymentStatus.UNKNOWN) PaymentStatus status,@JsonKey(name: 'target_version') double targetVersion,@JsonKey(name: 'should_check_after_paid') bool shouldCheckAfterPaid,@JsonKey(name: 'check_during_trial') bool checkDuringTrial,@JsonKey(name: 'expire_date') DateTime? expireDateTime,@JsonKey(name: 'warning_date') DateTime? warningDate,@JsonKey(name: 'strict_max_launch') bool strictMaxLaunch,@JsonKey(name: 'max_launch') int? maxLaunch,@JsonKey(name: 'developer_details') Map<String, dynamic> developerDetails,@JsonKey(name: 'additional_fields') Map<String, dynamic> additionalFields
+@JsonKey(name: 'status', unknownEnumValue: PaymentStatus.UNKNOWN) PaymentStatus status,@JsonKey(name: 'target_version') double? targetVersion,@JsonKey(name: 'should_check_after_paid') bool shouldCheckAfterPaid,@JsonKey(name: 'check_during_trial') bool checkDuringTrial,@JsonKey(name: 'expire_date') DateTime? expireDateTime,@JsonKey(name: 'warning_date') DateTime? warningDate,@JsonKey(name: 'strict_max_launch') bool strictMaxLaunch,@JsonKey(name: 'max_launch') int? maxLaunch,@JsonKey(name: 'developer_details') Map<String, dynamic> developerDetails,@JsonKey(name: 'additional_fields') Map<String, dynamic> additionalFields
 });
 
 
@@ -337,11 +337,11 @@ class _$LicenseCheckerPaymentModelCopyWithImpl<$Res>
 
 /// Create a copy of LicenseCheckerPaymentModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? targetVersion = null,Object? shouldCheckAfterPaid = null,Object? checkDuringTrial = null,Object? expireDateTime = freezed,Object? warningDate = freezed,Object? strictMaxLaunch = null,Object? maxLaunch = freezed,Object? developerDetails = null,Object? additionalFields = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? status = null,Object? targetVersion = freezed,Object? shouldCheckAfterPaid = null,Object? checkDuringTrial = null,Object? expireDateTime = freezed,Object? warningDate = freezed,Object? strictMaxLaunch = null,Object? maxLaunch = freezed,Object? developerDetails = null,Object? additionalFields = null,}) {
   return _then(_self.copyWith(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as PaymentStatus,targetVersion: null == targetVersion ? _self.targetVersion : targetVersion // ignore: cast_nullable_to_non_nullable
-as double,shouldCheckAfterPaid: null == shouldCheckAfterPaid ? _self.shouldCheckAfterPaid : shouldCheckAfterPaid // ignore: cast_nullable_to_non_nullable
+as PaymentStatus,targetVersion: freezed == targetVersion ? _self.targetVersion : targetVersion // ignore: cast_nullable_to_non_nullable
+as double?,shouldCheckAfterPaid: null == shouldCheckAfterPaid ? _self.shouldCheckAfterPaid : shouldCheckAfterPaid // ignore: cast_nullable_to_non_nullable
 as bool,checkDuringTrial: null == checkDuringTrial ? _self.checkDuringTrial : checkDuringTrial // ignore: cast_nullable_to_non_nullable
 as bool,expireDateTime: freezed == expireDateTime ? _self.expireDateTime : expireDateTime // ignore: cast_nullable_to_non_nullable
 as DateTime?,warningDate: freezed == warningDate ? _self.warningDate : warningDate // ignore: cast_nullable_to_non_nullable
@@ -431,7 +431,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'status', unknownEnumValue: PaymentStatus.UNKNOWN)  PaymentStatus status, @JsonKey(name: 'target_version')  double targetVersion, @JsonKey(name: 'should_check_after_paid')  bool shouldCheckAfterPaid, @JsonKey(name: 'check_during_trial')  bool checkDuringTrial, @JsonKey(name: 'expire_date')  DateTime? expireDateTime, @JsonKey(name: 'warning_date')  DateTime? warningDate, @JsonKey(name: 'strict_max_launch')  bool strictMaxLaunch, @JsonKey(name: 'max_launch')  int? maxLaunch, @JsonKey(name: 'developer_details')  Map<String, dynamic> developerDetails, @JsonKey(name: 'additional_fields')  Map<String, dynamic> additionalFields)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'status', unknownEnumValue: PaymentStatus.UNKNOWN)  PaymentStatus status, @JsonKey(name: 'target_version')  double? targetVersion, @JsonKey(name: 'should_check_after_paid')  bool shouldCheckAfterPaid, @JsonKey(name: 'check_during_trial')  bool checkDuringTrial, @JsonKey(name: 'expire_date')  DateTime? expireDateTime, @JsonKey(name: 'warning_date')  DateTime? warningDate, @JsonKey(name: 'strict_max_launch')  bool strictMaxLaunch, @JsonKey(name: 'max_launch')  int? maxLaunch, @JsonKey(name: 'developer_details')  Map<String, dynamic> developerDetails, @JsonKey(name: 'additional_fields')  Map<String, dynamic> additionalFields)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _AppPaymentModel() when $default != null:
 return $default(_that.status,_that.targetVersion,_that.shouldCheckAfterPaid,_that.checkDuringTrial,_that.expireDateTime,_that.warningDate,_that.strictMaxLaunch,_that.maxLaunch,_that.developerDetails,_that.additionalFields);case _:
@@ -452,7 +452,7 @@ return $default(_that.status,_that.targetVersion,_that.shouldCheckAfterPaid,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'status', unknownEnumValue: PaymentStatus.UNKNOWN)  PaymentStatus status, @JsonKey(name: 'target_version')  double targetVersion, @JsonKey(name: 'should_check_after_paid')  bool shouldCheckAfterPaid, @JsonKey(name: 'check_during_trial')  bool checkDuringTrial, @JsonKey(name: 'expire_date')  DateTime? expireDateTime, @JsonKey(name: 'warning_date')  DateTime? warningDate, @JsonKey(name: 'strict_max_launch')  bool strictMaxLaunch, @JsonKey(name: 'max_launch')  int? maxLaunch, @JsonKey(name: 'developer_details')  Map<String, dynamic> developerDetails, @JsonKey(name: 'additional_fields')  Map<String, dynamic> additionalFields)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'status', unknownEnumValue: PaymentStatus.UNKNOWN)  PaymentStatus status, @JsonKey(name: 'target_version')  double? targetVersion, @JsonKey(name: 'should_check_after_paid')  bool shouldCheckAfterPaid, @JsonKey(name: 'check_during_trial')  bool checkDuringTrial, @JsonKey(name: 'expire_date')  DateTime? expireDateTime, @JsonKey(name: 'warning_date')  DateTime? warningDate, @JsonKey(name: 'strict_max_launch')  bool strictMaxLaunch, @JsonKey(name: 'max_launch')  int? maxLaunch, @JsonKey(name: 'developer_details')  Map<String, dynamic> developerDetails, @JsonKey(name: 'additional_fields')  Map<String, dynamic> additionalFields)  $default,) {final _that = this;
 switch (_that) {
 case _AppPaymentModel():
 return $default(_that.status,_that.targetVersion,_that.shouldCheckAfterPaid,_that.checkDuringTrial,_that.expireDateTime,_that.warningDate,_that.strictMaxLaunch,_that.maxLaunch,_that.developerDetails,_that.additionalFields);}
@@ -469,7 +469,7 @@ return $default(_that.status,_that.targetVersion,_that.shouldCheckAfterPaid,_tha
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'status', unknownEnumValue: PaymentStatus.UNKNOWN)  PaymentStatus status, @JsonKey(name: 'target_version')  double targetVersion, @JsonKey(name: 'should_check_after_paid')  bool shouldCheckAfterPaid, @JsonKey(name: 'check_during_trial')  bool checkDuringTrial, @JsonKey(name: 'expire_date')  DateTime? expireDateTime, @JsonKey(name: 'warning_date')  DateTime? warningDate, @JsonKey(name: 'strict_max_launch')  bool strictMaxLaunch, @JsonKey(name: 'max_launch')  int? maxLaunch, @JsonKey(name: 'developer_details')  Map<String, dynamic> developerDetails, @JsonKey(name: 'additional_fields')  Map<String, dynamic> additionalFields)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'status', unknownEnumValue: PaymentStatus.UNKNOWN)  PaymentStatus status, @JsonKey(name: 'target_version')  double? targetVersion, @JsonKey(name: 'should_check_after_paid')  bool shouldCheckAfterPaid, @JsonKey(name: 'check_during_trial')  bool checkDuringTrial, @JsonKey(name: 'expire_date')  DateTime? expireDateTime, @JsonKey(name: 'warning_date')  DateTime? warningDate, @JsonKey(name: 'strict_max_launch')  bool strictMaxLaunch, @JsonKey(name: 'max_launch')  int? maxLaunch, @JsonKey(name: 'developer_details')  Map<String, dynamic> developerDetails, @JsonKey(name: 'additional_fields')  Map<String, dynamic> additionalFields)?  $default,) {final _that = this;
 switch (_that) {
 case _AppPaymentModel() when $default != null:
 return $default(_that.status,_that.targetVersion,_that.shouldCheckAfterPaid,_that.checkDuringTrial,_that.expireDateTime,_that.warningDate,_that.strictMaxLaunch,_that.maxLaunch,_that.developerDetails,_that.additionalFields);case _:
@@ -484,11 +484,11 @@ return $default(_that.status,_that.targetVersion,_that.shouldCheckAfterPaid,_tha
 @JsonSerializable()
 
 class _AppPaymentModel implements LicenseCheckerPaymentModel {
-  const _AppPaymentModel({@JsonKey(name: 'status', unknownEnumValue: PaymentStatus.UNKNOWN) this.status = PaymentStatus.UNKNOWN, @JsonKey(name: 'target_version') this.targetVersion = 0, @JsonKey(name: 'should_check_after_paid') this.shouldCheckAfterPaid = false, @JsonKey(name: 'check_during_trial') this.checkDuringTrial = false, @JsonKey(name: 'expire_date') this.expireDateTime, @JsonKey(name: 'warning_date') this.warningDate, @JsonKey(name: 'strict_max_launch') this.strictMaxLaunch = true, @JsonKey(name: 'max_launch') this.maxLaunch, @JsonKey(name: 'developer_details') final  Map<String, dynamic> developerDetails = const {}, @JsonKey(name: 'additional_fields') final  Map<String, dynamic> additionalFields = const {}}): _developerDetails = developerDetails,_additionalFields = additionalFields;
+  const _AppPaymentModel({@JsonKey(name: 'status', unknownEnumValue: PaymentStatus.UNKNOWN) this.status = PaymentStatus.UNKNOWN, @JsonKey(name: 'target_version') this.targetVersion, @JsonKey(name: 'should_check_after_paid') this.shouldCheckAfterPaid = false, @JsonKey(name: 'check_during_trial') this.checkDuringTrial = false, @JsonKey(name: 'expire_date') this.expireDateTime, @JsonKey(name: 'warning_date') this.warningDate, @JsonKey(name: 'strict_max_launch') this.strictMaxLaunch = true, @JsonKey(name: 'max_launch') this.maxLaunch, @JsonKey(name: 'developer_details') final  Map<String, dynamic> developerDetails = const {}, @JsonKey(name: 'additional_fields') final  Map<String, dynamic> additionalFields = const {}}): _developerDetails = developerDetails,_additionalFields = additionalFields;
   factory _AppPaymentModel.fromJson(Map<String, dynamic> json) => _$AppPaymentModelFromJson(json);
 
 @override@JsonKey(name: 'status', unknownEnumValue: PaymentStatus.UNKNOWN) final  PaymentStatus status;
-@override@JsonKey(name: 'target_version') final  double targetVersion;
+@override@JsonKey(name: 'target_version') final  double? targetVersion;
 @override@JsonKey(name: 'should_check_after_paid') final  bool shouldCheckAfterPaid;
 @override@JsonKey(name: 'check_during_trial') final  bool checkDuringTrial;
 @override@JsonKey(name: 'expire_date') final  DateTime? expireDateTime;
@@ -543,7 +543,7 @@ abstract mixin class _$AppPaymentModelCopyWith<$Res> implements $LicenseCheckerP
   factory _$AppPaymentModelCopyWith(_AppPaymentModel value, $Res Function(_AppPaymentModel) _then) = __$AppPaymentModelCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'status', unknownEnumValue: PaymentStatus.UNKNOWN) PaymentStatus status,@JsonKey(name: 'target_version') double targetVersion,@JsonKey(name: 'should_check_after_paid') bool shouldCheckAfterPaid,@JsonKey(name: 'check_during_trial') bool checkDuringTrial,@JsonKey(name: 'expire_date') DateTime? expireDateTime,@JsonKey(name: 'warning_date') DateTime? warningDate,@JsonKey(name: 'strict_max_launch') bool strictMaxLaunch,@JsonKey(name: 'max_launch') int? maxLaunch,@JsonKey(name: 'developer_details') Map<String, dynamic> developerDetails,@JsonKey(name: 'additional_fields') Map<String, dynamic> additionalFields
+@JsonKey(name: 'status', unknownEnumValue: PaymentStatus.UNKNOWN) PaymentStatus status,@JsonKey(name: 'target_version') double? targetVersion,@JsonKey(name: 'should_check_after_paid') bool shouldCheckAfterPaid,@JsonKey(name: 'check_during_trial') bool checkDuringTrial,@JsonKey(name: 'expire_date') DateTime? expireDateTime,@JsonKey(name: 'warning_date') DateTime? warningDate,@JsonKey(name: 'strict_max_launch') bool strictMaxLaunch,@JsonKey(name: 'max_launch') int? maxLaunch,@JsonKey(name: 'developer_details') Map<String, dynamic> developerDetails,@JsonKey(name: 'additional_fields') Map<String, dynamic> additionalFields
 });
 
 
@@ -560,11 +560,11 @@ class __$AppPaymentModelCopyWithImpl<$Res>
 
 /// Create a copy of LicenseCheckerPaymentModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? targetVersion = null,Object? shouldCheckAfterPaid = null,Object? checkDuringTrial = null,Object? expireDateTime = freezed,Object? warningDate = freezed,Object? strictMaxLaunch = null,Object? maxLaunch = freezed,Object? developerDetails = null,Object? additionalFields = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? status = null,Object? targetVersion = freezed,Object? shouldCheckAfterPaid = null,Object? checkDuringTrial = null,Object? expireDateTime = freezed,Object? warningDate = freezed,Object? strictMaxLaunch = null,Object? maxLaunch = freezed,Object? developerDetails = null,Object? additionalFields = null,}) {
   return _then(_AppPaymentModel(
 status: null == status ? _self.status : status // ignore: cast_nullable_to_non_nullable
-as PaymentStatus,targetVersion: null == targetVersion ? _self.targetVersion : targetVersion // ignore: cast_nullable_to_non_nullable
-as double,shouldCheckAfterPaid: null == shouldCheckAfterPaid ? _self.shouldCheckAfterPaid : shouldCheckAfterPaid // ignore: cast_nullable_to_non_nullable
+as PaymentStatus,targetVersion: freezed == targetVersion ? _self.targetVersion : targetVersion // ignore: cast_nullable_to_non_nullable
+as double?,shouldCheckAfterPaid: null == shouldCheckAfterPaid ? _self.shouldCheckAfterPaid : shouldCheckAfterPaid // ignore: cast_nullable_to_non_nullable
 as bool,checkDuringTrial: null == checkDuringTrial ? _self.checkDuringTrial : checkDuringTrial // ignore: cast_nullable_to_non_nullable
 as bool,expireDateTime: freezed == expireDateTime ? _self.expireDateTime : expireDateTime // ignore: cast_nullable_to_non_nullable
 as DateTime?,warningDate: freezed == warningDate ? _self.warningDate : warningDate // ignore: cast_nullable_to_non_nullable
