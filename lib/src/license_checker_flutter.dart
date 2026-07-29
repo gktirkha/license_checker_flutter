@@ -1,5 +1,5 @@
 import 'constants/license_checker_error_messages.dart';
-import 'exception/license_checker_exception.dart';
+import 'exception/license_checker_flutter_exception.dart';
 import 'helpers/license_checker_flutter_helper.dart';
 import 'logger/license_checker_logger.dart';
 import 'models/license_checker_api_response_model/license_checker_api_response_model.dart';
@@ -17,7 +17,7 @@ class LicenseCheckerFlutter {
     try {
       _config = InitService.init(config);
       if (_config == null) {
-        throw LicenseCheckerException(
+        throw LicenseCheckerFlutterException(
           .initFailed,
           message: LicenseCheckerErrorMessages.configResolvedNull,
         );
@@ -25,8 +25,8 @@ class LicenseCheckerFlutter {
       _logTag = _config!.logTag;
       await StorageService.init(_config!);
     } catch (e, s) {
-      if (e is LicenseCheckerException) rethrow;
-      throw LicenseCheckerException(
+      if (e is LicenseCheckerFlutterException) rethrow;
+      throw LicenseCheckerFlutterException(
         .initFailed,
         message: LicenseCheckerErrorMessages.initFailed,
         stackTrace: s,
@@ -53,7 +53,7 @@ class LicenseCheckerFlutter {
     bool useCachedConfigOnNetworkException = true,
   }) async {
     if (_config == null) {
-      throw LicenseCheckerException(
+      throw LicenseCheckerFlutterException(
         .initFailed,
         message: LicenseCheckerErrorMessages.configResolvedNull,
       );
@@ -128,7 +128,7 @@ class LicenseCheckerFlutter {
           StorageService.paymentModel;
       if (useCachedConfigOnNetworkException &&
           operationModel != null &&
-          e is LicenseCheckerException &&
+          e is LicenseCheckerFlutterException &&
           e.type == .networkException) {
         licenseCheckerLogger(e);
         await LicenseCheckerFlutterHelper.handleExecution(
@@ -155,11 +155,11 @@ class LicenseCheckerFlutter {
     }
   }
 
-  static LicenseCheckerException _convertException(
+  static LicenseCheckerFlutterException _convertException(
     dynamic exception,
     StackTrace stackTrace,
   ) {
-    if (exception is LicenseCheckerException) {
+    if (exception is LicenseCheckerFlutterException) {
       return exception;
     } else {
       return .new(

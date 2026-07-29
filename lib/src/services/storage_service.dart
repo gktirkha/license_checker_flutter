@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../constants/license_checker_error_messages.dart';
-import '../exception/license_checker_exception.dart';
+import '../exception/license_checker_flutter_exception.dart';
 import '../logger/license_checker_logger.dart';
 import '../models/license_checker_api_response_model/license_checker_api_response_model.dart';
 import '../models/license_checker_config/license_checker_config.dart';
@@ -17,10 +17,10 @@ class StorageService {
       _preferences = await SharedPreferences.getInstance();
       _setConfig(config.rulesVersion, config.appName);
     } catch (e, s) {
-      if (e is LicenseCheckerException) {
+      if (e is LicenseCheckerFlutterException) {
         rethrow;
       }
-      throw LicenseCheckerException(
+      throw LicenseCheckerFlutterException(
         .initFailed,
         message: LicenseCheckerErrorMessages.storageInitFailed,
         stackTrace: s,
@@ -58,7 +58,7 @@ class StorageService {
       return _preferences!.getDouble(_StorageServiceKeys.version) ?? 0;
     } catch (e, s) {
       licenseCheckerLogger(e);
-      throw LicenseCheckerException(
+      throw LicenseCheckerFlutterException(
         .initFailed,
         message: LicenseCheckerErrorMessages.readVersionFailed,
         stackTrace: s,
@@ -71,7 +71,7 @@ class StorageService {
       return _preferences!.getString(_StorageServiceKeys.appName);
     } catch (e, s) {
       licenseCheckerLogger(e);
-      throw LicenseCheckerException(
+      throw LicenseCheckerFlutterException(
         .initFailed,
         message: LicenseCheckerErrorMessages.readAppNameFailed,
         stackTrace: s,
@@ -84,7 +84,7 @@ class StorageService {
       await _preferences!.setDouble(_StorageServiceKeys.version, version);
     } catch (e, s) {
       licenseCheckerLogger(e);
-      throw LicenseCheckerException(
+      throw LicenseCheckerFlutterException(
         .initFailed,
         message: LicenseCheckerErrorMessages.writeVersionFailed,
         stackTrace: s,
@@ -96,7 +96,7 @@ class StorageService {
     try {
       await _preferences!.setString(_StorageServiceKeys.appName, appName);
     } catch (e, s) {
-      throw LicenseCheckerException(
+      throw LicenseCheckerFlutterException(
         .initFailed,
         message: LicenseCheckerErrorMessages.writeAppNameFailed,
         stackTrace: s,
@@ -109,7 +109,7 @@ class StorageService {
       return _preferences!.getInt(_StorageServiceKeys.allowedLaunchCount) ?? 0;
     } catch (e, s) {
       licenseCheckerLogger(e);
-      throw LicenseCheckerException(
+      throw LicenseCheckerFlutterException(
         .initFailed,
         message: LicenseCheckerErrorMessages.readAllowedLaunchCountFailed,
         stackTrace: s,
@@ -128,7 +128,7 @@ class StorageService {
       );
     } catch (e, s) {
       licenseCheckerLogger(e);
-      throw LicenseCheckerException(
+      throw LicenseCheckerFlutterException(
         .initFailed,
         message: LicenseCheckerErrorMessages.writeAllowedLaunchCountFailed,
         stackTrace: s,
@@ -151,7 +151,7 @@ class StorageService {
       );
     } catch (e, s) {
       licenseCheckerLogger(e);
-      throw LicenseCheckerException(
+      throw LicenseCheckerFlutterException(
         .initFailed,
         message: LicenseCheckerErrorMessages.clearAllowedLaunchCountFailed,
         stackTrace: s,
@@ -164,7 +164,7 @@ class StorageService {
       await _preferences!.setInt(_StorageServiceKeys.allowedLaunchCount, 0);
     } catch (e, s) {
       licenseCheckerLogger(e);
-      throw LicenseCheckerException(
+      throw LicenseCheckerFlutterException(
         .initFailed,
         message: LicenseCheckerErrorMessages.clearAllowedLaunchCountFailed,
         stackTrace: s,
@@ -183,7 +183,7 @@ class StorageService {
       );
     } catch (e, s) {
       licenseCheckerLogger(e);
-      throw LicenseCheckerException(
+      throw LicenseCheckerFlutterException(
         .initFailed,
         message: LicenseCheckerErrorMessages.readPaymentModelFailed,
         stackTrace: s,
@@ -199,7 +199,7 @@ class StorageService {
       );
     } catch (e, s) {
       licenseCheckerLogger(e);
-      throw LicenseCheckerException(
+      throw LicenseCheckerFlutterException(
         .initFailed,
         message: LicenseCheckerErrorMessages.writePaymentModelFailed,
         stackTrace: s,
@@ -217,7 +217,7 @@ class StorageService {
       }
     } catch (e, s) {
       licenseCheckerLogger(e);
-      throw LicenseCheckerException(
+      throw LicenseCheckerFlutterException(
         .initFailed,
         message: LicenseCheckerErrorMessages.clearStorageFailed,
         stackTrace: s,

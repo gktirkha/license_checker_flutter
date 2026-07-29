@@ -1,5 +1,5 @@
 import '../enums/on_unhandled_reason.dart';
-import '../exception/license_checker_exception.dart';
+import '../exception/license_checker_flutter_exception.dart';
 import '../models/license_checker_api_response_model/license_checker_api_response_model.dart';
 
 typedef OnUnhandled =
@@ -8,7 +8,7 @@ typedef OnUnhandled =
       LicenseCheckerPaymentModel? licenseCheckerPaymentModel,
     );
 
-typedef OnException = Function(LicenseCheckerException exception);
+typedef OnException = Function(LicenseCheckerFlutterException exception);
 
 typedef OnAppNotFound = Function();
 

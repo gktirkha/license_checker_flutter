@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:dio/dio.dart';
 
 import '../constants/license_checker_error_messages.dart';
-import '../exception/license_checker_exception.dart';
+import '../exception/license_checker_flutter_exception.dart';
 import '../logger/license_checker_logger.dart';
 import '../models/license_checker_api_response_model/license_checker_api_response_model.dart';
 import '../models/license_checker_config/license_checker_config.dart';
@@ -106,7 +106,7 @@ class LicenseCheckerFlutterHelper {
             LicenseCheckerErrorMessages.networkTransformTimeout,
         };
 
-        throw LicenseCheckerException(
+        throw LicenseCheckerFlutterException(
           message: message,
           .networkException,
           apiResponse: e.response?.toString(),
@@ -158,7 +158,7 @@ class LicenseCheckerFlutterHelper {
           int? currentLaunchCount = StorageService.allowedLaunchCount;
 
           if (allowedLaunches == null) {
-            throw LicenseCheckerException(
+            throw LicenseCheckerFlutterException(
               .configException,
               message:
                   LicenseCheckerErrorMessages.maxLaunchNotSetForLimitedLaunches,
@@ -196,7 +196,7 @@ class LicenseCheckerFlutterHelper {
           final warningDate = operationModel.warningDate;
           final expiryDate = operationModel.expireDateTime;
           if (expiryDate == null) {
-            throw LicenseCheckerException(
+            throw LicenseCheckerFlutterException(
               .configException,
               message: LicenseCheckerErrorMessages.expireDateNotSetForTrial,
             );
@@ -225,7 +225,7 @@ class LicenseCheckerFlutterHelper {
           break;
 
         case .UNKNOWN:
-          throw LicenseCheckerException(
+          throw LicenseCheckerFlutterException(
             .unknownPaymentStatus,
             message: LicenseCheckerErrorMessages.unknownPaymentStatus,
             operationConfiguration: operationModel,
@@ -237,11 +237,11 @@ class LicenseCheckerFlutterHelper {
     }
   }
 
-  static LicenseCheckerException _convertException(
+  static LicenseCheckerFlutterException _convertException(
     dynamic exception,
     StackTrace stackTrace,
   ) {
-    if (exception is LicenseCheckerException) {
+    if (exception is LicenseCheckerFlutterException) {
       return exception;
     } else {
       return .new(
