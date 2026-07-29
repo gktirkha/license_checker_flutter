@@ -1,4 +1,4 @@
-import '../models/license_checker_config.dart';
+import '../models/license_checker_config/license_checker_config.dart';
 
 class InitService {
   InitService._();

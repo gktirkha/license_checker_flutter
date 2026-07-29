@@ -1,7 +1,8 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../exception/license_checker_exception.dart';
-import '../models/license_checker_config.dart';
+import '../logger/license_checker_logger.dart';
+import '../models/license_checker_config/license_checker_config.dart';
 
 class StorageService {
   StorageService._();
@@ -48,6 +49,7 @@ class StorageService {
     try {
       return _preferences!.getDouble(_StorageServiceKeys.version) ?? 0;
     } catch (e) {
+      licenseCheckerLogger(e);
       throw LicenseCheckerException(.initFailed);
     }
   }
@@ -56,6 +58,7 @@ class StorageService {
     try {
       return _preferences!.getString(_StorageServiceKeys.appName);
     } catch (e) {
+      licenseCheckerLogger(e);
       throw LicenseCheckerException(.initFailed);
     }
   }
@@ -64,6 +67,7 @@ class StorageService {
     try {
       await _preferences!.setDouble(_StorageServiceKeys.version, version);
     } catch (e) {
+      licenseCheckerLogger(e);
       throw LicenseCheckerException(.initFailed);
     }
   }
@@ -80,6 +84,7 @@ class StorageService {
     try {
       return _preferences!.getInt(_StorageServiceKeys.launchCount) ?? 0;
     } catch (e) {
+      licenseCheckerLogger(e);
       throw LicenseCheckerException(.initFailed);
     }
   }
@@ -94,6 +99,7 @@ class StorageService {
         launchToBeSet,
       );
     } catch (e) {
+      licenseCheckerLogger(e);
       throw LicenseCheckerException(.initFailed);
     }
   }
@@ -102,6 +108,7 @@ class StorageService {
     try {
       await _preferences!.clear();
     } catch (e) {
+      licenseCheckerLogger(e);
       throw LicenseCheckerException(.initFailed);
     }
   }

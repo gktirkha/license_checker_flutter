@@ -1,0 +1,72 @@
+// GENERATED CODE - DO NOT MODIFY BY HAND
+
+part of 'license_checker_api_response_model.dart';
+
+// **************************************************************************
+// JsonSerializableGenerator
+// **************************************************************************
+
+_LicenseCheckerApiResponseModel _$LicenseCheckerApiResponseModelFromJson(
+  Map<String, dynamic> json,
+) => _LicenseCheckerApiResponseModel(
+  apps:
+      (json['apps'] as List<dynamic>?)
+          ?.map(
+            (e) =>
+                LicenseCheckerPaymentModel.fromJson(e as Map<String, dynamic>),
+          )
+          .toList() ??
+      const [],
+);
+
+Map<String, dynamic> _$LicenseCheckerApiResponseModelToJson(
+  _LicenseCheckerApiResponseModel instance,
+) => <String, dynamic>{'apps': instance.apps};
+
+_AppPaymentModel _$AppPaymentModelFromJson(Map<String, dynamic> json) =>
+    _AppPaymentModel(
+      status:
+          $enumDecodeNullable(
+            _$PaymentStatusEnumMap,
+            json['status'],
+            unknownValue: PaymentStatus.UNKNOWN,
+          ) ??
+          PaymentStatus.UNKNOWN,
+      targetVersion: (json['target_version'] as num?)?.toDouble() ?? 0,
+      shouldCheckAfterPaid: json['should_check_after_paid'] as bool? ?? false,
+      checkDuringTrial: json['check_during_trial'] as bool? ?? false,
+      expireDateTime: json['expire_date'] == null
+          ? null
+          : DateTime.parse(json['expire_date'] as String),
+      warningDate: json['warning_date'] == null
+          ? null
+          : DateTime.parse(json['warning_date'] as String),
+      strictMaxLaunch: json['strict_max_launch'] as bool? ?? true,
+      maxLaunch: (json['max_launch'] as num?)?.toInt(),
+      developerDetails:
+          json['developer_details'] as Map<String, dynamic>? ?? const {},
+      additionalFields:
+          json['additional_fields'] as Map<String, dynamic>? ?? const {},
+    );
+
+Map<String, dynamic> _$AppPaymentModelToJson(_AppPaymentModel instance) =>
+    <String, dynamic>{
+      'status': _$PaymentStatusEnumMap[instance.status]!,
+      'target_version': instance.targetVersion,
+      'should_check_after_paid': instance.shouldCheckAfterPaid,
+      'check_during_trial': instance.checkDuringTrial,
+      'expire_date': instance.expireDateTime?.toIso8601String(),
+      'warning_date': instance.warningDate?.toIso8601String(),
+      'strict_max_launch': instance.strictMaxLaunch,
+      'max_launch': instance.maxLaunch,
+      'developer_details': instance.developerDetails,
+      'additional_fields': instance.additionalFields,
+    };
+
+const _$PaymentStatusEnumMap = {
+  PaymentStatus.PAID: 'PAID',
+  PaymentStatus.UNPAID: 'UNPAID',
+  PaymentStatus.ALLOW_LIMITED_LAUNCHES: 'ALLOW_LIMITED_LAUNCHES',
+  PaymentStatus.ON_TRIAL: 'ON_TRIAL',
+  PaymentStatus.UNKNOWN: 'UNKNOWN',
+};
