@@ -2,6 +2,7 @@ import 'dart:convert';
 
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../constants/license_checker_error_messages.dart';
 import '../exception/license_checker_exception.dart';
 import '../logger/license_checker_logger.dart';
 import '../models/license_checker_api_response_model/license_checker_api_response_model.dart';
@@ -15,11 +16,15 @@ class StorageService {
     try {
       _preferences = await SharedPreferences.getInstance();
       _setConfig(config.rulesVersion, config.appName);
-    } catch (e) {
+    } catch (e, s) {
       if (e is LicenseCheckerException) {
         rethrow;
       }
-      throw LicenseCheckerException(.initFailed);
+      throw LicenseCheckerException(
+        .initFailed,
+        message: LicenseCheckerErrorMessages.storageInitFailed,
+        stackTrace: s,
+      );
     }
   }
 
@@ -51,45 +56,64 @@ class StorageService {
   static double get _version {
     try {
       return _preferences!.getDouble(_StorageServiceKeys.version) ?? 0;
-    } catch (e) {
+    } catch (e, s) {
       licenseCheckerLogger(e);
-      throw LicenseCheckerException(.initFailed);
+      throw LicenseCheckerException(
+        .initFailed,
+        message: LicenseCheckerErrorMessages.readVersionFailed,
+        stackTrace: s,
+      );
     }
   }
 
   static String? get _appName {
     try {
       return _preferences!.getString(_StorageServiceKeys.appName);
-    } catch (e) {
+    } catch (e, s) {
       licenseCheckerLogger(e);
-      throw LicenseCheckerException(.initFailed);
+      throw LicenseCheckerException(
+        .initFailed,
+        message: LicenseCheckerErrorMessages.readAppNameFailed,
+        stackTrace: s,
+      );
     }
   }
 
   static Future<void> _setVersion(double version) async {
     try {
       await _preferences!.setDouble(_StorageServiceKeys.version, version);
-    } catch (e) {
+    } catch (e, s) {
       licenseCheckerLogger(e);
-      throw LicenseCheckerException(.initFailed);
+      throw LicenseCheckerException(
+        .initFailed,
+        message: LicenseCheckerErrorMessages.writeVersionFailed,
+        stackTrace: s,
+      );
     }
   }
 
   static Future<void> _setAppName(String appName) async {
     try {
       await _preferences!.setString(_StorageServiceKeys.appName, appName);
-    } catch (e) {
-      throw LicenseCheckerException(.initFailed);
+    } catch (e, s) {
+      throw LicenseCheckerException(
+        .initFailed,
+        message: LicenseCheckerErrorMessages.writeAppNameFailed,
+        stackTrace: s,
+      );
     }
   }
 
   static int get allowedLaunchCount {
     try {
-      return _preferences!.getInt(_StorageServiceKeys.allowedLaunchCount) ??
-          0;
-    } catch (e) {
+      return _preferences!.getInt(_StorageServiceKeys.allowedLaunchCount) ?? 0;
+    } catch (e, s) {
       licenseCheckerLogger(e);
-      throw LicenseCheckerException(.initFailed);
+      throw LicenseCheckerException(
+        .initFailed,
+        message: LicenseCheckerErrorMessages.readAllowedLaunchCountFailed,
+        stackTrace: s,
+      );
     }
   }
 
@@ -102,18 +126,26 @@ class StorageService {
         _StorageServiceKeys.allowedLaunchCount,
         launchToBeSet,
       );
-    } catch (e) {
+    } catch (e, s) {
       licenseCheckerLogger(e);
-      throw LicenseCheckerException(.initFailed);
+      throw LicenseCheckerException(
+        .initFailed,
+        message: LicenseCheckerErrorMessages.writeAllowedLaunchCountFailed,
+        stackTrace: s,
+      );
     }
   }
 
   static Future<void> clearAllowedLaunchCount() async {
     try {
       await _preferences!.setInt(_StorageServiceKeys.allowedLaunchCount, 0);
-    } catch (e) {
+    } catch (e, s) {
       licenseCheckerLogger(e);
-      throw LicenseCheckerException(.initFailed);
+      throw LicenseCheckerException(
+        .initFailed,
+        message: LicenseCheckerErrorMessages.clearAllowedLaunchCountFailed,
+        stackTrace: s,
+      );
     }
   }
 
@@ -126,9 +158,13 @@ class StorageService {
       return LicenseCheckerPaymentModel.fromJson(
         jsonDecode(raw) as Map<String, dynamic>,
       );
-    } catch (e) {
+    } catch (e, s) {
       licenseCheckerLogger(e);
-      throw LicenseCheckerException(.initFailed);
+      throw LicenseCheckerException(
+        .initFailed,
+        message: LicenseCheckerErrorMessages.readPaymentModelFailed,
+        stackTrace: s,
+      );
     }
   }
 
@@ -138,9 +174,13 @@ class StorageService {
         _StorageServiceKeys.paymentModel,
         jsonEncode(model.toJson()),
       );
-    } catch (e) {
+    } catch (e, s) {
       licenseCheckerLogger(e);
-      throw LicenseCheckerException(.initFailed);
+      throw LicenseCheckerException(
+        .initFailed,
+        message: LicenseCheckerErrorMessages.writePaymentModelFailed,
+        stackTrace: s,
+      );
     }
   }
 
@@ -152,9 +192,13 @@ class StorageService {
       for (final key in keys) {
         await _preferences!.remove(key);
       }
-    } catch (e) {
+    } catch (e, s) {
       licenseCheckerLogger(e);
-      throw LicenseCheckerException(.initFailed);
+      throw LicenseCheckerException(
+        .initFailed,
+        message: LicenseCheckerErrorMessages.clearStorageFailed,
+        stackTrace: s,
+      );
     }
   }
 }

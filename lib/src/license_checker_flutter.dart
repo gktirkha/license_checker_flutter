@@ -1,3 +1,4 @@
+import 'constants/license_checker_error_messages.dart';
 import 'exception/license_checker_exception.dart';
 import 'models/license_checker_config/license_checker_config.dart';
 import 'services/init_service.dart';
@@ -12,13 +13,20 @@ class LicenseCheckerFlutter {
     try {
       _config = InitService.init(config);
       if (_config == null) {
-        throw LicenseCheckerException(.initFailed);
+        throw LicenseCheckerException(
+          .initFailed,
+          message: LicenseCheckerErrorMessages.configResolvedNull,
+        );
       }
       _logTag = _config!.logTag;
       await StorageService.init(_config!);
-    } catch (e) {
+    } catch (e, s) {
       if (e is LicenseCheckerException) rethrow;
-      throw LicenseCheckerException(.initFailed);
+      throw LicenseCheckerException(
+        .initFailed,
+        message: LicenseCheckerErrorMessages.initFailed,
+        stackTrace: s,
+      );
     }
   }
 }
