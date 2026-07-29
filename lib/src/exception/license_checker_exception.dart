@@ -1,4 +1,5 @@
 import '../models/license_checker_api_response_model/license_checker_api_response_model.dart';
+import 'license_checker_exception_type.dart';
 
 class LicenseCheckerException {
   LicenseCheckerException(
@@ -28,5 +29,3 @@ class LicenseCheckerException {
     return returnMessage;
   }
 }
-
-enum LicenseCheckerExceptionType { initFailed }

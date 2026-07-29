@@ -9,7 +9,9 @@ part 'license_checker_api_response_model.g.dart';
 sealed class LicenseCheckerApiResponseModel
     with _$LicenseCheckerApiResponseModel {
   factory LicenseCheckerApiResponseModel({
-    @Default([]) @JsonKey(name: 'apps') List<LicenseCheckerPaymentModel> apps,
+    @Default({})
+    @JsonKey(name: 'apps')
+    Map<String, LicenseCheckerPaymentModel>? apps,
   }) = _LicenseCheckerApiResponseModel;
 
   factory LicenseCheckerApiResponseModel.fromJson(Map<String, dynamic> json) =>

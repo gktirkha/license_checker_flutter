@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$LicenseCheckerApiResponseModel {
 
-@JsonKey(name: 'apps') List<LicenseCheckerPaymentModel> get apps;
+@JsonKey(name: 'apps') Map<String, LicenseCheckerPaymentModel>? get apps;
 /// Create a copy of LicenseCheckerApiResponseModel
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -48,7 +48,7 @@ abstract mixin class $LicenseCheckerApiResponseModelCopyWith<$Res>  {
   factory $LicenseCheckerApiResponseModelCopyWith(LicenseCheckerApiResponseModel value, $Res Function(LicenseCheckerApiResponseModel) _then) = _$LicenseCheckerApiResponseModelCopyWithImpl;
 @useResult
 $Res call({
-@JsonKey(name: 'apps') List<LicenseCheckerPaymentModel> apps
+@JsonKey(name: 'apps') Map<String, LicenseCheckerPaymentModel>? apps
 });
 
 
@@ -65,10 +65,10 @@ class _$LicenseCheckerApiResponseModelCopyWithImpl<$Res>
 
 /// Create a copy of LicenseCheckerApiResponseModel
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? apps = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? apps = freezed,}) {
   return _then(_self.copyWith(
-apps: null == apps ? _self.apps : apps // ignore: cast_nullable_to_non_nullable
-as List<LicenseCheckerPaymentModel>,
+apps: freezed == apps ? _self.apps : apps // ignore: cast_nullable_to_non_nullable
+as Map<String, LicenseCheckerPaymentModel>?,
   ));
 }
 
@@ -150,7 +150,7 @@ return $default(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'apps')  List<LicenseCheckerPaymentModel> apps)?  $default,{required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>(TResult Function(@JsonKey(name: 'apps')  Map<String, LicenseCheckerPaymentModel>? apps)?  $default,{required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _LicenseCheckerApiResponseModel() when $default != null:
 return $default(_that.apps);case _:
@@ -171,7 +171,7 @@ return $default(_that.apps);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'apps')  List<LicenseCheckerPaymentModel> apps)  $default,) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>(TResult Function(@JsonKey(name: 'apps')  Map<String, LicenseCheckerPaymentModel>? apps)  $default,) {final _that = this;
 switch (_that) {
 case _LicenseCheckerApiResponseModel():
 return $default(_that.apps);}
@@ -188,7 +188,7 @@ return $default(_that.apps);}
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'apps')  List<LicenseCheckerPaymentModel> apps)?  $default,) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>(TResult? Function(@JsonKey(name: 'apps')  Map<String, LicenseCheckerPaymentModel>? apps)?  $default,) {final _that = this;
 switch (_that) {
 case _LicenseCheckerApiResponseModel() when $default != null:
 return $default(_that.apps);case _:
@@ -203,14 +203,16 @@ return $default(_that.apps);case _:
 @JsonSerializable()
 
 class _LicenseCheckerApiResponseModel implements LicenseCheckerApiResponseModel {
-   _LicenseCheckerApiResponseModel({@JsonKey(name: 'apps') final  List<LicenseCheckerPaymentModel> apps = const []}): _apps = apps;
+   _LicenseCheckerApiResponseModel({@JsonKey(name: 'apps') final  Map<String, LicenseCheckerPaymentModel>? apps = const {}}): _apps = apps;
   factory _LicenseCheckerApiResponseModel.fromJson(Map<String, dynamic> json) => _$LicenseCheckerApiResponseModelFromJson(json);
 
- final  List<LicenseCheckerPaymentModel> _apps;
-@override@JsonKey(name: 'apps') List<LicenseCheckerPaymentModel> get apps {
-  if (_apps is EqualUnmodifiableListView) return _apps;
+ final  Map<String, LicenseCheckerPaymentModel>? _apps;
+@override@JsonKey(name: 'apps') Map<String, LicenseCheckerPaymentModel>? get apps {
+  final value = _apps;
+  if (value == null) return null;
+  if (_apps is EqualUnmodifiableMapView) return _apps;
   // ignore: implicit_dynamic_type
-  return EqualUnmodifiableListView(_apps);
+  return EqualUnmodifiableMapView(value);
 }
 
 
@@ -247,7 +249,7 @@ abstract mixin class _$LicenseCheckerApiResponseModelCopyWith<$Res> implements $
   factory _$LicenseCheckerApiResponseModelCopyWith(_LicenseCheckerApiResponseModel value, $Res Function(_LicenseCheckerApiResponseModel) _then) = __$LicenseCheckerApiResponseModelCopyWithImpl;
 @override @useResult
 $Res call({
-@JsonKey(name: 'apps') List<LicenseCheckerPaymentModel> apps
+@JsonKey(name: 'apps') Map<String, LicenseCheckerPaymentModel>? apps
 });
 
 
@@ -264,10 +266,10 @@ class __$LicenseCheckerApiResponseModelCopyWithImpl<$Res>
 
 /// Create a copy of LicenseCheckerApiResponseModel
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? apps = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? apps = freezed,}) {
   return _then(_LicenseCheckerApiResponseModel(
-apps: null == apps ? _self._apps : apps // ignore: cast_nullable_to_non_nullable
-as List<LicenseCheckerPaymentModel>,
+apps: freezed == apps ? _self._apps : apps // ignore: cast_nullable_to_non_nullable
+as Map<String, LicenseCheckerPaymentModel>?,
   ));
 }
 

@@ -10,13 +10,13 @@ _LicenseCheckerApiResponseModel _$LicenseCheckerApiResponseModelFromJson(
   Map<String, dynamic> json,
 ) => _LicenseCheckerApiResponseModel(
   apps:
-      (json['apps'] as List<dynamic>?)
-          ?.map(
-            (e) =>
-                LicenseCheckerPaymentModel.fromJson(e as Map<String, dynamic>),
-          )
-          .toList() ??
-      const [],
+      (json['apps'] as Map<String, dynamic>?)?.map(
+        (k, e) => MapEntry(
+          k,
+          LicenseCheckerPaymentModel.fromJson(e as Map<String, dynamic>),
+        ),
+      ) ??
+      const {},
 );
 
 Map<String, dynamic> _$LicenseCheckerApiResponseModelToJson(

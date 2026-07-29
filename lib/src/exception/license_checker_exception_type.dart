@@ -1,0 +1,1 @@
+enum LicenseCheckerExceptionType { initFailed, networkException }
